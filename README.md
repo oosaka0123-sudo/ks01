@@ -11,6 +11,7 @@
 
 - `index.html`：クライアント向けギャラリー。01〜30の演出カードと、31番パーティクル専用ページへのリンク。
 - `particles.html`：31番「生き物のように動く光の粒」。Canvas 2D、カーソル・タッチへの反応、再生停止、粒子数の調整、reduced-motion対応。
+- `workflow.html`：ChatGPT・Claude・Geminiの独立3案の選抜統合フローを紹介する特設ページ。
 - `demo.html`：2026-10-11に制作した家のホームページ風の元デザイン（保存版）。
 
 ## ギャラリーにある演出
@@ -26,7 +27,8 @@
 - このRepositoryは**クライアント向け展示サイト**。再利用するデザイン部品の正本は [web-design-master](https://github.com/oosaka0123-sudo/web-design-master)。
 - GitHub Pagesは `main` のルートを公開。
 - `chat-homepage` と `rss7-house` への自動反映はしない。`rss7-house` は読み取り専用。
-- ギャラリートップに画像を追加しない。元デモはオリジナルを維持する。
+- ギャラリートップに写真・コンテンツ画像を追加しない。ブランドロゴのみ例外とし、元デモはオリジナルを維持する。
+- ブランド素材：`favicon.svg`、`assets/brand/logo.png`（透過PNG）、`assets/brand/logo-light.png`（暗色背景用透過PNG）。
 - 見本は制作結果・実績を保証するものではない。
 
 ## 検証記録
