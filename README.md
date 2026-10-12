@@ -2,20 +2,35 @@
 
 **見て、動かして、選べるホームページデザイン集。**
 
-公開サイト: https://oosaka0123-sudo.github.io/ks01/
+- [公開ギャラリー](https://oosaka0123-sudo.github.io/ks01/)
+- [パーティクル体験ページ](https://oosaka0123-sudo.github.io/ks01/particles.html)
+- [元の家のホームページ風デモ](https://oosaka0123-sudo.github.io/ks01/demo.html)
+- [チャットホームページ](https://chat.rss7.net/)
 
-## 構成
-- `index.html`: クライアント向け公開ギャラリー。8種類のWeb演出を日本語で紹介
-- `demo.html`: 2026-10-11に制作した家のホームページ風デザインの原版（元ファイル `rss7_overlay_share_preview_safe.html`）
+## ページ構成
 
-## 演出
-01 全画面オーバーレイ / 02 透過ヘッダー / 03 Scroll Reveal / 04 Image Reveal / 05 Scroll Progress / 06 Marquee / 07 Hover Reaction / 08 Animated Underline
+- `index.html`：クライアント向けギャラリー。01〜30の演出カードと、31番パーティクル専用ページへのリンク。
+- `particles.html`：31番「生き物のように動く光の粒」。Canvas 2D、カーソル・タッチへの反応、再生停止、粒子数の調整、reduced-motion対応。
+- `demo.html`：2026-10-11に制作した家のホームページ風の元デザイン（保存版）。
 
-実サイトへ適用するときは [web-design-master](https://github.com/oosaka0123-sudo/web-design-master) にある共通部品を参照し、元サイトのデザインと動作を個別検証してください。ここは**クライアント向けの展示サイト**であり、共通部品の正本ではありません。
+## ギャラリーにある演出
 
-## 公開と保護
-- GitHub Pages: `main` root
-- `chat-homepage`（本番）および `rss7-house`（読み取り専用）には自動反映しない
-- デモ内の表現は実績や納品結果を保証しない
-- 画像はギャラリートップには追加しない。元デモはオリジナルを保存
-- Claude CLIレビュー実施、Gemini CLIは認証未設定のため未実施（2026-10-11）
+- 01〜08：フルスクリーンメニュー、透過ヘッダー、スクロール／画像リビール、進捗バー、マーキー、ホバー、リンク下線
+- 09〜16：FAQ、横スワイプ、Before/After比較、カウントアップ、タブ、詳細ポップアップ、コピー、テーマ切り替え
+- 17〜24：絞り込み、入力チェック、ズーム、マーカー、矢印、SVGラインドロー、もっと見る、表示形式切り替え
+- 25〜30：ステップ表示、トースト通知、目次の現在位置、新着表示、フローティングCTA、読み込みプレースホルダー
+- 31：パーティクルアニメーション（専用ページ）
+
+## 運用境界
+
+- このRepositoryは**クライアント向け展示サイト**。再利用するデザイン部品の正本は [web-design-master](https://github.com/oosaka0123-sudo/web-design-master)。
+- GitHub Pagesは `main` のルートを公開。
+- `chat-homepage` と `rss7-house` への自動反映はしない。`rss7-house` は読み取り専用。
+- ギャラリートップに画像を追加しない。元デモはオリジナルを維持する。
+- 見本は制作結果・実績を保証するものではない。
+
+## 検証記録
+
+2026-10-12：GitHub Pagesデプロイ成功を確認。公開URL `/` と `/particles.html` はHTTP 200。ギャラリー／パーティクルからチャットホームページ、チャットホームページからギャラリー、制作の流れページから国内参考サイト3選へのリンクが公開HTML内に存在することを確認。
+
+2026-10-11：ChatGPT・Claude CLI・Antigravity CLI経由GeminiでWeb小技の独立提案・比較を実施。全31種類の実機操作テストやWeb Vitals測定は**未実施**。一部のデモは仕組みを理解するための簡易表現。
