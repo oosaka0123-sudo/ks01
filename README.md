@@ -22,6 +22,15 @@
 - 25〜30：ステップ表示、トースト通知、目次の現在位置、新着表示、フローティングCTA、読み込みプレースホルダー
 - 31：パーティクルアニメーション（専用ページ）
 
+## 共通ロゴ・フッター・共有
+
+- `index.html`、`workflow.html`、`particles.html` は共通フッターを使用する。
+- 既存の透過PNGロゴ（通常/暗背景用）をヘッダーとフッターで再利用。ファビコンは既存の `favicon.svg` を維持。
+- `assets/css/site-footer.css` は共通フッターの見た目、`assets/js/site-share.js` は共有ボタンの処理を担当。
+- 共有は対応ブラウザではOS標準の共有画面、非対応時には現在ページのURLをコピー。外部トラッカーやSNS SDKを追加しない。
+- フッタークレジットは全3ページで **powered by RSS7.ai Works** に統一。
+- `demo.html` は保存版の元デザインとして改変せず、共通フッターの対象外。
+
 ## 運用境界
 
 - このRepositoryは**クライアント向け展示サイト**。再利用するデザイン部品の正本は [web-design-master](https://github.com/oosaka0123-sudo/web-design-master)。
