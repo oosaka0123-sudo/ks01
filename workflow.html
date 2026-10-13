@@ -60,7 +60,7 @@ tr.chosen{background:#f2f6f4}tr.chosen th::after{content:"採用";display:inline
 @media(max-width:420px){.merge .grid{grid-template-columns:4.2rem repeat(4,minmax(0,1fr));font-size:.7rem}}
 @media(max-width:600px){.hero{display:block}.hero>div{min-width:0;overflow-wrap:anywhere}.merge{max-width:100%;min-width:0;overflow-x:auto;margin-top:2rem}.merge .grid{min-width:290px}header nav{max-width:100%;overflow-wrap:anywhere}.panel,.file,.role{min-width:0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
-.brand-logo{display:block;width:clamp(196px,27vw,278px);height:auto;max-width:100%}</style></head><body>
+.brand-logo{display:block;width:clamp(196px,27vw,278px);height:auto;max-width:100%}</style><link rel="stylesheet" href="./assets/css/site-footer.css"></head><body>
 <a class="skip" href="#main">本文へ移動</a>
 <header><a href="./" class="brand"><img class="brand-logo" src="./assets/brand/logo.png" alt="Web Design Gallery by RSS7" width="790" height="184"></a><nav aria-label="ページ内メニュー"><a href="#roles">3つの役割</a><a href="#flow">流れ</a><a href="#select">比較と選定</a><a href="#docs">設計文書</a><a href="#qa">QA</a><a href="./">ギャラリーへ</a></nav></header>
 <main id="main">
@@ -137,7 +137,34 @@ tr.chosen{background:#f2f6f4}tr.chosen th::after{content:"採用";display:inline
 <p>ギャラリーの演出は、動かして比べられるように1つずつ置いています。気になった演出の番号を手がかりに、見せ方を選んでみてください。</p>
 <a class="cta" href="./#effects">ギャラリーに戻る</a></section>
 </main>
-<footer class="foot">© 2026 Web Design Gallery by RSS7　|　制作の進め方を紹介するページです。比較表と文書の中身は説明用の例です。　|　<a href="./">ギャラリーへ戻る</a></footer>
+<footer class="rss7-footer" aria-label="共通フッター">
+ <div class="rss7-footer__grid">
+  <div>
+   <a class="rss7-footer__brand" href="./" aria-label="Web Design Gallery by RSS7 のトップページ"><img class="rss7-footer__logo" src="./assets/brand/logo-light.png" alt="Web Design Gallery by RSS7" width="790" height="184" loading="lazy" decoding="async"></a>
+   <p class="rss7-footer__description">見て、動かして、選べるWebデザイン。制作の流れや31種類の演出を紹介します。</p>
+  </div>
+  <div>
+   <nav class="rss7-footer__links" aria-label="フッターナビゲーション">
+    <a href="./">演出ギャラリー</a>
+    <a href="./workflow.html" aria-current="page">AI制作フロー</a>
+    <a href="./particles.html">パーティクルデモ</a>
+    <a href="./demo.html">制作見本</a>
+    <a href="https://chat.rss7.net/" target="_blank" rel="noopener noreferrer">チャットホームページ ↗</a>
+   </nav>
+   <div class="rss7-footer__share">
+    <button class="rss7-footer__share-button" type="button" aria-label="このページを共有する">
+     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.6 6.5-4.1M8.7 13.4l6.5 4.1"/></svg>
+     このページを共有
+    </button>
+    <span class="rss7-footer__status" role="status" aria-live="polite" aria-atomic="true"></span>
+   </div>
+  </div>
+ </div>
+ <div class="rss7-footer__bottom">
+  <p>© 2026 Web Design Gallery by RSS7</p>
+  <p class="rss7-footer__credit">powered by RSS7.ai Works</p>
+ </div>
+</footer>
 <script>
 (()=>{'use strict';
 const P={a:'ChatGPT案',b:'Claude案',c:'Gemini案'};
@@ -166,4 +193,4 @@ const dEl=document.getElementById('doc-design'),cEl=document.getElementById('doc
 function fill(pre,i,key){pre.replaceChildren();for(let s=0;s<=i;s++)STAGES[s][key].forEach(line=>{const n=s===i&&i>0?el('ins','',line):document.createTextNode(line);pre.append(n,'\n')})}
 tabs(st,STAGES.map(s=>s.t),'',(i,id)=>{dp.setAttribute('aria-labelledby',id);fill(dEl,i,'d');fill(cEl,i,'c')});
 })();
-</script></body></html>
+</script><script src="./assets/js/site-share.js" defer></script></body></html>
