@@ -8,8 +8,16 @@ Claude Code はセッション開始時にこのファイルを読み、詳細�
 1. このRepoの最新 `main` を確認（`git fetch origin main`）。
 2. 最新マスターを取得して読む（Public・クラウドから読み取り可、2026-10-15 実確認）：
    ```
-   git clone --depth 1 https://github.com/oosaka0123-sudo/ai-master /tmp/ai-master
-   git clone --depth 1 https://github.com/oosaka0123-sudo/web-design-master /tmp/web-design-master
+   for repo in ai-master web-design-master; do
+     dest="/tmp/$repo"
+     if [ -d "$dest/.git" ]; then
+       git -C "$dest" fetch --depth 1 origin main && git -C "$dest" checkout -B rss7-readonly origin/main
+     elif [ ! -e "$dest" ]; then
+       git clone --depth 1 --branch main "https://github.com/oosaka0123-sudo/$repo" "$dest"
+     else
+       echo "既存の $dest はGitリポジトリではないため中断" >&2; exit 1
+     fi
+   done
    ```
    取得できない場合も、下の「必須ルール」は常に守る。
 3. 優先順位：**ai-master → web-design-master（KSデザインマスター）→ このRepoの README.md**。
