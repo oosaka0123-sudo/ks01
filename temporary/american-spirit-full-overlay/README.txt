@@ -1,0 +1,1 @@
+Temporary standalone web demo. Open index.html in a browser. Video used: user-supplied 21127.mp4 (optimized to 720x1280 H.264). Logo SVG has a transparent background. No tracking, sales or purchase links. Delete this whole directory to remove.
