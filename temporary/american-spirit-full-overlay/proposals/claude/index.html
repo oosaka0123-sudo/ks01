@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>鏡のような海で、波を待つ。｜非公式・非商用のビジュアルデザイン研究</title>
+<meta name="description" content="四秒の海の映像を一枚の紙面として組む、非公式・非商用のウェブデザイン習作。">
+<meta name="theme-color" content="#0B1F45">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/poster.jpg" as="image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
+<style>
+  :root {
+    --sky: #0F2C6E;      /* 空の群青 */
+    --gold: #E9C37A;     /* 雲の金 */
+    --lagoon: #2FA9A0;   /* 波の翠 */
+    --lagoon-deep: #1D6F6A;
+    --salt: #EEF3F0;     /* 潮の白 */
+    --ink: #0B1F45;      /* 深い紺 */
+    --white: #FFFFFF;
+    --serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+    --sans: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "YuGothic", "Meiryo", sans-serif;
+    --bar-h: 64px;
+    --gutter: clamp(20px, 5vw, 72px);
+    --horizon: 52%;
+    --focus: var(--gold);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    margin: 0;
+    background: var(--salt);
+    color: var(--ink);
+    font: 400 1rem/1.85 var(--sans);
+    font-feature-settings: "palt" 0;
+    overflow-wrap: anywhere;
+    line-break: strict;
+  }
+  img, svg, video { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+  .on-light { --focus: var(--ink); }
+  .on-dark { --focus: var(--gold); }
+
+  .skip {
+    position: fixed; left: 12px; top: 12px; z-index: 100;
+    padding: 10px 16px; background: var(--white); color: var(--ink);
+    font-weight: 500; text-decoration: none;
+    transform: translateY(-160%);
+  }
+  .skip:focus { transform: none; --focus: var(--ink); }
+
+  /* ───────── Fixed header ───────── */
+  .bar {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    height: calc(var(--bar-h) + env(safe-area-inset-top));
+    padding: 0 var(--gutter);
+    padding-top: env(safe-area-inset-top);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background: rgba(11, 31, 69, .36);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid rgba(255, 255, 255, .14);
+    color: var(--white);
+    transition: background-color .4s ease;
+  }
+  .bar.is-solid { background: rgba(11, 31, 69, .86); }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .bar { background: rgba(11, 31, 69, .72); }
+  }
+  .brand { display: inline-flex; align-items: center; min-height: 44px; flex: none; }
+  .brand img { height: 34px; width: auto; }
+
+  .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: clamp(4px, 1.6vw, 24px); }
+  .nav a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px;
+    font-size: .9375rem; letter-spacing: .08em; text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) left calc(100% - 10px) / 0 1px no-repeat;
+    transition: background-size .3s ease;
+  }
+  .nav a:hover, .nav a[aria-current] { background-size: calc(100% - 16px) 1px; background-position: 8px calc(100% - 10px); }
+  .menu-btn { display: none; }
+
+  @media (max-width: 720px) {
+    :root { --bar-h: 56px; }
+    .brand img { height: 30px; }
+    .nav a { font-size: .875rem; padding: 0 6px; }
+    .js .menu-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      min-height: 44px; min-width: 44px; padding: 0 4px 0 12px;
+      background: none; border: 0; color: inherit; font: 500 .875rem/1 var(--sans); letter-spacing: .08em;
+      cursor: pointer;
+    }
+    .menu-btn__icon { position: relative; width: 22px; height: 12px; }
+    .menu-btn__icon::before, .menu-btn__icon::after {
+      content: ""; position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor;
+      transition: transform .25s ease, top .25s ease;
+    }
+    .menu-btn__icon::before { top: 0; }
+    .menu-btn__icon::after { top: 10px; }
+    .menu-btn[aria-expanded="true"] .menu-btn__icon::before { top: 5px; transform: rotate(20deg); }
+    .menu-btn[aria-expanded="true"] .menu-btn__icon::after { top: 5px; transform: rotate(-20deg); }
+
+    .js .nav {
+      position: fixed; left: 0; right: 0; top: calc(var(--bar-h) + env(safe-area-inset-top));
+      background: rgba(11, 31, 69, .94);
+      border-bottom: 1px solid rgba(255, 255, 255, .14);
+      padding: 8px var(--gutter) 20px;
+      display: none;
+    }
+    .js .nav.is-open { display: block; }
+    .js .nav ul { flex-direction: column; gap: 0; }
+    .js .nav a {
+      display: flex; min-height: 52px; padding: 0; font-family: var(--serif); font-size: 1.25rem; font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, .12); background: none;
+    }
+    .js .nav a[aria-current] { color: var(--gold); }
+  }
+
+  /* ───────── Hero ───────── */
+  .hero {
+    position: relative;
+    height: 100vh; height: 100svh;
+    min-height: 540px;
+    overflow: hidden;
+    background: var(--sky) url("../../assets/poster.jpg") 50% 60% / cover no-repeat;
+    color: var(--white);
+    isolation: isolate;
+  }
+  .hero__video {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 60%;
+    z-index: -2;
+  }
+  .hero__scrim {
+    position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(60% 55% at 78% 34%, rgba(11, 31, 69, .52), transparent 70%),
+      linear-gradient(to top, rgba(11, 31, 69, .78) 0%, rgba(11, 31, 69, 0) 34%),
+      linear-gradient(to bottom, rgba(11, 31, 69, .4) 0%, rgba(11, 31, 69, 0) 18%);
+  }
+
+  /* Headline set on the video's horizon (desktop / tablet) */
+  .mark, .mark-mirror {
+    position: absolute; left: 46%; right: var(--gutter);
+    margin: 0;
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(2.25rem, 5.2vw, 5.5rem);
+    line-height: 1.12; letter-spacing: .04em;
+    font-feature-settings: "palt" 1;
+  }
+  .mark { bottom: calc(100% - var(--horizon) + .06em); text-shadow: 0 2px 28px rgba(11, 31, 69, .55); }
+  .mark-mirror {
+    top: calc(var(--horizon) + .06em);
+    transform: scaleY(-1); transform-origin: 50% 50%;
+    color: rgba(255, 255, 255, .5);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .55) 35%, transparent 75%);
+    mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .55) 35%, transparent 75%);
+    pointer-events: none; user-select: none;
+  }
+  .mark-mirror .mark__inner { filter: blur(.6px); }
+  @media (max-width: 960px) { .mark, .mark-mirror { left: 40%; } }
+  .mark__line { display: block; overflow: hidden; padding-inline-end: .1em; }
+  .mark__inner { display: block; white-space: nowrap; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mark__inner { animation: rise 1.4s cubic-bezier(.2, .7, .1, 1) both; }
+    .mark__line:nth-child(2) .mark__inner { animation-delay: .18s; }
+    .mark-mirror .mark__wave { animation: swell 4s ease-in-out 1.6s infinite; transform-origin: 50% 100%; }
+  }
+  .mark__wave { display: block; }
+  @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+  @keyframes swell {
+    0%, 100% { transform: none; }
+    50% { transform: scaleY(.9) skewX(-3deg) translateX(.06em); }
+  }
+
+  .hero__meta {
+    position: absolute; left: var(--gutter); right: var(--gutter);
+    bottom: calc(96px + env(safe-area-inset-bottom));
+    max-width: 30em;
+  }
+  .hero__tag {
+    margin: 0 0 .5em; display: inline-block;
+    font-size: .8125rem; letter-spacing: .1em;
+    padding: 2px 10px; border: 1px solid rgba(255, 255, 255, .7);
+    background: rgba(11, 31, 69, .45);
+  }
+  .hero__lede { margin: 0; font-size: .9375rem; line-height: 1.8; text-shadow: 0 1px 12px rgba(11, 31, 69, .8); }
+
+  .controls {
+    position: absolute; left: var(--gutter); right: var(--gutter);
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    display: flex; align-items: center; gap: 12px;
+  }
+  .ctrl {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-width: 44px; height: 44px; padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, .7); border-radius: 22px;
+    background: rgba(11, 31, 69, .5); color: var(--white);
+    font: 500 .8125rem/1 var(--sans); letter-spacing: .06em;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  }
+  .ctrl:hover { background: rgba(11, 31, 69, .75); }
+  .ctrl[aria-disabled="true"] { opacity: .62; cursor: not-allowed; }
+  .ctrl svg { width: 14px; height: 14px; flex: none; }
+  .ctrl .when-on, .ctrl.is-on .when-off { display: none; }
+  .ctrl.is-on .when-on { display: inline; }
+  .loop { flex: 1; display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .loop__track { position: relative; flex: 1; height: 1px; background: rgba(255, 255, 255, .45); max-width: 240px; }
+  .loop__fill { position: absolute; inset: -1px 0; background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; }
+  .loop__time { font-size: .75rem; letter-spacing: .06em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hero__next {
+    margin-left: auto; display: inline-flex; align-items: center; min-height: 44px;
+    font-size: .8125rem; letter-spacing: .12em; text-decoration: none;
+    writing-mode: horizontal-tb;
+  }
+  .hero__next::after { content: ""; width: 1px; height: 28px; margin-left: 12px; background: currentColor; }
+
+  /* Smartphone idea: portrait video ≈ portrait screen. Headline goes vertical into the sky. */
+  @media (max-width: 600px) {
+    .hero { min-height: 520px; }
+    .hero__video, .hero { background-position: 50% 50%; object-position: 50% 50%; }
+    .hero__scrim {
+      background:
+        linear-gradient(to left, rgba(11, 31, 69, .5) 0%, rgba(11, 31, 69, 0) 45%),
+        linear-gradient(to top, rgba(11, 31, 69, .85) 0%, rgba(11, 31, 69, 0) 40%),
+        linear-gradient(to bottom, rgba(11, 31, 69, .45) 0%, rgba(11, 31, 69, 0) 20%);
+    }
+    .mark {
+      left: auto; right: max(14px, env(safe-area-inset-right)); bottom: auto;
+      top: calc(var(--bar-h) + 24px);
+      writing-mode: vertical-rl;
+      font-size: clamp(1.75rem, 9.6vw, 2.5rem);
+      line-height: 1.3; letter-spacing: .12em;
+    }
+    .mark__line { padding-inline-end: 0; }
+    .mark-mirror { display: none; }
+    .hero__meta { bottom: calc(84px + env(safe-area-inset-bottom)); right: 30%; }
+    .hero__tag { font-size: .75rem; letter-spacing: .04em; }
+    .hero__lede { font-size: .875rem; }
+    .controls { gap: 8px; bottom: calc(18px + env(safe-area-inset-bottom)); }
+    .ctrl { padding: 0 12px; }
+    .ctrl__label { display: none; }
+    .hero__next { display: none; }
+  }
+  @media (max-width: 360px) {
+    .hero__meta { right: 26%; }
+    .loop__time { display: none; }
+  }
+  @media (max-width: 600px) and (max-height: 600px) {
+    .hero__lede { display: none; }
+  }
+
+  /* ───────── Lower sections ───────── */
+  main section:not(.hero) { scroll-margin-top: var(--bar-h); }
+  .chapter { position: relative; padding: clamp(72px, 11vw, 152px) var(--gutter); }
+  .chapter__rule {
+    position: absolute; top: 0; left: var(--gutter); right: var(--gutter);
+    height: 1px; background: currentColor; opacity: .5;
+    transform-origin: 0 50%;
+  }
+  .js .chapter__rule { transform: scaleX(0); }
+  .js .chapter.is-in .chapter__rule { transform: none; transition: transform 1.2s cubic-bezier(.2, .7, .1, 1); }
+  @media (prefers-reduced-motion: reduce) {
+    .js .chapter__rule { transform: none; transition: none; }
+  }
+
+  .chapter__grid {
+    display: grid; gap: clamp(28px, 4vw, 64px);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    max-width: 1280px; margin: 0 auto;
+  }
+  @media (max-width: 860px) { .chapter__grid { grid-template-columns: minmax(0, 1fr); } }
+  .chapter h2 {
+    margin: 0; font-family: var(--serif); font-weight: 700;
+    font-size: clamp(1.75rem, 3.6vw, 3rem); line-height: 1.35; letter-spacing: .04em;
+    font-feature-settings: "palt" 1;
+  }
+  .chapter__intro { margin: 1.25em 0 0; max-width: 32em; }
+  .chapter p { max-width: 36em; }
+
+  /* Horizon chapter: two wireframes */
+  .frames { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; margin: 0; }
+  @media (max-width: 480px) { .frames { grid-template-columns: minmax(0, 1fr); } }
+  .frame { margin: 0; }
+  .frame svg { width: 100%; height: auto; }
+  .frame--phone svg { max-width: 220px; }
+  .frame figcaption { margin-top: 14px; font-size: .875rem; line-height: 1.8; }
+  .frame figcaption strong { display: block; font-family: var(--serif); font-size: 1.0625rem; font-weight: 700; margin-bottom: 2px; }
+
+  /* Palette chapter: strata ordered sky → seabed */
+  .strata { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(11, 31, 69, .25); }
+  .stratum {
+    display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 20px; align-items: center;
+    padding: 16px 0; border-bottom: 1px solid rgba(11, 31, 69, .25);
+  }
+  .stratum__chip { height: 56px; border: 1px solid rgba(11, 31, 69, .2); }
+  .stratum__name { font-family: var(--serif); font-weight: 700; font-size: 1.125rem; }
+  .stratum__hex { margin-left: .75em; font-size: .875rem; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+  .stratum__role { margin: 2px 0 0; font-size: .875rem; line-height: 1.75; }
+  @media (max-width: 400px) { .stratum { grid-template-columns: 56px minmax(0, 1fr); gap: 14px; } .stratum__chip { height: 72px; } }
+
+  /* Motion chapter (dark) */
+  .chapter--deep { background: var(--sky); color: var(--white); }
+  .chapter--deep a { color: var(--gold); }
+  .clock { margin: 0 0 40px; }
+  .clock__label { font-size: .875rem; letter-spacing: .06em; margin: 0; }
+  .clock__read {
+    margin: 4px 0 12px; font-family: var(--serif); font-weight: 500;
+    font-size: clamp(4.5rem, 14vw, 10rem); line-height: 1; letter-spacing: -.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .clock__read small { font-size: .22em; letter-spacing: .08em; margin-left: .3em; }
+  .clock__scale { position: relative; height: 28px; max-width: 560px; }
+  .clock__scale::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(255, 255, 255, .5); }
+  .clock__fill { position: absolute; left: 0; right: 0; top: -1px; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; }
+  .clock__ticks { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+  .clock__ticks li { position: absolute; top: 0; padding-top: 8px; font-size: .75rem; transform: translateX(-50%); }
+  .clock__ticks li::before { content: ""; position: absolute; top: 0; left: 50%; width: 1px; height: 6px; background: rgba(255, 255, 255, .7); }
+  .clock__ticks li:first-child { transform: none; }
+  .clock__ticks li:first-child::before { left: 0; }
+  .clock__ticks li:last-child { transform: translateX(-100%); }
+  .clock__ticks li:last-child::before { left: auto; right: 0; }
+  .rules { margin: 0; display: grid; gap: 0; border-top: 1px solid rgba(255, 255, 255, .3); }
+  .rules div { display: grid; grid-template-columns: minmax(0, 11em) minmax(0, 1fr); gap: 8px 24px; padding: 18px 0; border-bottom: 1px solid rgba(255, 255, 255, .3); }
+  .rules dt { font-family: var(--serif); font-weight: 700; font-size: 1.0625rem; }
+  .rules dd { margin: 0; font-size: .9375rem; }
+  @media (max-width: 560px) { .rules div { grid-template-columns: minmax(0, 1fr); } }
+
+  /* Notes */
+  .notes { list-style: none; margin: 0; padding: 0; }
+  .notes li { padding: 16px 0 16px 1.4em; position: relative; border-bottom: 1px solid rgba(11, 31, 69, .2); }
+  .notes li::before { content: ""; position: absolute; left: 0; top: 1.65em; width: .7em; height: 1px; background: currentColor; }
+  .notes li:first-child { font-weight: 500; }
+
+  .foot {
+    background: var(--ink); color: var(--white);
+    padding: 40px var(--gutter) calc(40px + env(safe-area-inset-bottom));
+    display: flex; flex-wrap: wrap; gap: 12px 32px; align-items: center; justify-content: space-between;
+    font-size: .8125rem; letter-spacing: .04em;
+  }
+  .foot img { height: 28px; width: auto; }
+  .foot p { margin: 0; }
+  .foot__powered { opacity: .85; }
+
+  .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+</style>
+</head>
+<body>
+<a class="skip" href="#horizon">本文へ移動</a>
+
+<header class="bar on-dark" id="bar">
+  <a class="brand" href="#hero"><img src="../../assets/logo.svg" width="133" height="34" alt="Visual Study（ページの先頭へ）"></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+    <span>メニュー</span><span class="menu-btn__icon" aria-hidden="true"></span>
+  </button>
+  <nav class="nav" id="site-nav" aria-label="ページ内の章">
+    <ul>
+      <li><a href="#horizon">水平線</a></li>
+      <li><a href="#palette">色</a></li>
+      <li><a href="#motion">四秒</a></li>
+      <li><a href="#notes">注記</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero on-dark" id="hero" aria-labelledby="hero-title">
+    <video class="hero__video" id="heroVideo" src="../../assets/hero.mp4" poster="../../assets/poster.jpg"
+      autoplay muted loop playsinline preload="auto"
+      aria-label="鏡のように静かな海で、サーファーがボードの上から波を待つ約四秒の映像"></video>
+    <script>
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var v = document.getElementById('heroVideo'); v.removeAttribute('autoplay'); v.pause();
+      }
+    </script>
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <h1 class="mark" id="hero-title">
+      <span class="mark__line"><span class="mark__inner">鏡のような海で、</span></span>
+      <span class="mark__line"><span class="mark__inner">波を待つ。</span></span>
+    </h1>
+    <div class="mark-mirror" aria-hidden="true">
+      <span class="mark__wave">
+        <span class="mark__line"><span class="mark__inner">鏡のような海で、</span></span>
+        <span class="mark__line"><span class="mark__inner">波を待つ。</span></span>
+      </span>
+    </div>
+
+    <div class="hero__meta">
+      <p class="hero__tag">非公式・非商用のビジュアルデザイン研究</p>
+      <p class="hero__lede">四秒の海の映像を、一枚の紙面として組むウェブデザインの習作です。</p>
+    </div>
+
+    <div class="controls" role="group" aria-label="映像の操作">
+      <button class="ctrl" id="playBtn" type="button" aria-label="映像を一時停止">
+        <svg class="when-off" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.2" height="12" fill="currentColor"/><rect x="8.8" y="1" width="3.2" height="12" fill="currentColor"/></svg>
+        <svg class="when-on" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.2v11.6L12.6 7z" fill="currentColor"/></svg>
+        <span class="ctrl__label" aria-hidden="true"><span class="when-off">停止</span><span class="when-on">再生</span></span>
+      </button>
+      <button class="ctrl" id="soundBtn" type="button" aria-pressed="false" aria-label="音声">
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 5h3l4-3.5v11L4 9H1z" fill="currentColor"/><path class="when-on" d="M10 4.2c1.6 1.5 1.6 4.1 0 5.6M11.6 2.6c2.5 2.4 2.5 6.4 0 8.8" stroke="currentColor" stroke-width="1.3" fill="none"/><path class="when-off" d="M10 4.8l3.4 4.4M13.4 4.8L10 9.2" stroke="currentColor" stroke-width="1.3"/></svg>
+        <span class="ctrl__label" id="soundLabel" aria-hidden="true">音声オフ</span>
+      </button>
+      <div class="loop" aria-hidden="true">
+        <span class="loop__track"><span class="loop__fill" id="loopFill"></span></span>
+        <span class="loop__time" id="loopTime">0.0 / 4.0 秒</span>
+      </div>
+      <a class="hero__next" href="#horizon">下へ読む</a>
+    </div>
+  </section>
+
+  <section class="chapter on-light" id="horizon" aria-labelledby="horizon-title">
+    <span class="chapter__rule" aria-hidden="true"></span>
+    <div class="chapter__grid">
+      <div>
+        <h2 id="horizon-title">水平線を、紙面の折り目にする。</h2>
+        <p class="chapter__intro">この映像でいちばん強い線は、空と海を分ける水平線です。文字・余白・操作部は、すべてこの一本の線との関係で配置しました。画面の比率が変わっても、スクリプトが映像内の水平線の位置を計算し、見出しをその上に合わせます。</p>
+      </div>
+      <div class="frames">
+        <figure class="frame">
+          <svg viewBox="0 0 320 200" role="img" aria-label="PCの構成図。右側の空に横書きの見出し、水平線の下にその鏡像、左側の水面にサーファー。">
+            <rect x=".5" y=".5" width="319" height="199" fill="#0F2C6E" stroke="#0B1F45"/>
+            <rect x=".5" y=".5" width="319" height="14" fill="#0B1F45"/>
+            <rect x="8" y="5" width="34" height="5" fill="#EEF3F0"/>
+            <rect x="248" y="6" width="14" height="3" fill="#EEF3F0" opacity=".7"/><rect x="266" y="6" width="10" height="3" fill="#EEF3F0" opacity=".7"/><rect x="280" y="6" width="14" height="3" fill="#EEF3F0" opacity=".7"/><rect x="298" y="6" width="14" height="3" fill="#EEF3F0" opacity=".7"/>
+            <line x1="0" y1="104" x2="320" y2="104" stroke="#2FA9A0" stroke-width="2"/>
+            <rect x="148" y="66" width="148" height="14" fill="#FFFFFF"/>
+            <rect x="148" y="84" width="90" height="14" fill="#FFFFFF"/>
+            <rect x="148" y="110" width="90" height="10" fill="#FFFFFF" opacity=".35"/>
+            <rect x="148" y="124" width="148" height="7" fill="#FFFFFF" opacity=".15"/>
+            <circle cx="90" cy="134" r="5" fill="#E9C37A"/>
+            <rect x="12" y="168" width="96" height="6" fill="#EEF3F0" opacity=".7"/>
+            <rect x="12" y="182" width="40" height="10" rx="5" fill="none" stroke="#EEF3F0"/>
+            <rect x="58" y="182" width="40" height="10" rx="5" fill="none" stroke="#EEF3F0"/>
+          </svg>
+          <figcaption><strong>PC</strong>見出しは右の空に置き、水平線のすぐ上で終わらせます。水面には見出しの鏡像がうすく揺れます。サーファーのいる左側には文字を置きません。</figcaption>
+        </figure>
+        <figure class="frame frame--phone">
+          <svg viewBox="0 0 120 240" role="img" aria-label="スマートフォンの構成図。右上の空に縦書きの見出し、水平線の下は空けてある。">
+            <rect x=".5" y=".5" width="119" height="239" rx="10" fill="#0F2C6E" stroke="#0B1F45"/>
+            <rect x="1" y="10" width="118" height="14" fill="#0B1F45"/>
+            <rect x="8" y="15" width="28" height="5" fill="#EEF3F0"/>
+            <rect x="96" y="15" width="16" height="5" fill="#EEF3F0" opacity=".7"/>
+            <rect x="100" y="34" width="10" height="72" fill="#FFFFFF"/>
+            <rect x="86" y="34" width="10" height="44" fill="#FFFFFF"/>
+            <line x1="0" y1="138" x2="120" y2="138" stroke="#2FA9A0" stroke-width="2"/>
+            <circle cx="36" cy="156" r="4" fill="#E9C37A"/>
+            <rect x="10" y="196" width="72" height="5" fill="#EEF3F0" opacity=".7"/>
+            <rect x="10" y="214" width="16" height="12" rx="6" fill="none" stroke="#EEF3F0"/>
+            <rect x="30" y="214" width="16" height="12" rx="6" fill="none" stroke="#EEF3F0"/>
+          </svg>
+          <figcaption><strong>スマートフォン</strong>縦長の映像は画面とほぼ同じ比率なので、ほとんど切り取らずに見せられます。見出しは縦書きにして右上の空へ。水平線より下は、サーファーと波のために空けておきます。</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter on-light" id="palette" aria-labelledby="palette-title">
+    <span class="chapter__rule" aria-hidden="true"></span>
+    <div class="chapter__grid">
+      <div>
+        <h2 id="palette-title">映像から拾った五つの色</h2>
+        <p class="chapter__intro">色は映像の静止画から、上の空から下の水底へ順に拾いました。文字に使う組み合わせは、WCAG AA の基準（通常の文字で4.5:1）を満たすものだけです。対比の数値は相対輝度からの計算値です。</p>
+      </div>
+      <ul class="strata">
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#0F2C6E" aria-hidden="true"></span>
+          <div><span class="stratum__name">空の群青</span><span class="stratum__hex">#0F2C6E</span>
+            <p class="stratum__role">「四秒」の章の地色。白い文字との対比は13.1:1。</p></div>
+        </li>
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#E9C37A" aria-hidden="true"></span>
+          <div><span class="stratum__name">雲の金</span><span class="stratum__hex">#E9C37A</span>
+            <p class="stratum__role">暗い面でのフォーカス表示と進行バー。深い紺との対比は9.7:1。明るい面の文字には使いません。</p></div>
+        </li>
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#2FA9A0" aria-hidden="true"></span>
+          <div><span class="stratum__name">波の翠</span><span class="stratum__hex">#2FA9A0</span>
+            <p class="stratum__role">図の水平線。深い紺との対比は5.6:1。明るい面で文字にするときは濃い翠 #1D6F6A（5.3:1）に替えます。</p></div>
+        </li>
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#EEF3F0" aria-hidden="true"></span>
+          <div><span class="stratum__name">潮の白</span><span class="stratum__hex">#EEF3F0</span>
+            <p class="stratum__role">明るい章の地色。深い紺の文字との対比は14.4:1。</p></div>
+        </li>
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#0B1F45" aria-hidden="true"></span>
+          <div><span class="stratum__name">深い紺</span><span class="stratum__hex">#0B1F45</span>
+            <p class="stratum__role">本文、半透明のヘッダー、フッター。</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter chapter--deep on-dark" id="motion" aria-labelledby="motion-title">
+    <span class="chapter__rule" aria-hidden="true"></span>
+    <div class="chapter__grid">
+      <div>
+        <h2 id="motion-title">四秒の使い方</h2>
+        <p class="chapter__intro">映像は約四秒で一周します。ページの動きはこの周期に合わせ、映像より目立つ動きは足していません。右の数字は、上の映像がいまループのどこにいるかを示しています。</p>
+      </div>
+      <div>
+        <div class="clock">
+          <p class="clock__label" id="clockLabel">現在のループ位置</p>
+          <p class="clock__read" aria-hidden="true"><span id="clockRead">0.0</span><small>秒</small></p>
+          <div class="clock__scale" aria-hidden="true">
+            <span class="clock__fill" id="clockFill"></span>
+            <ol class="clock__ticks">
+              <li style="left:0">0</li><li style="left:25%">1</li><li style="left:50%">2</li><li style="left:75%">3</li><li style="left:100%">4秒</li>
+            </ol>
+          </div>
+        </div>
+        <dl class="rules">
+          <div><dt>映像</dt><dd>音声なしで自動再生し、繰り返します。画面下の操作部で、いつでも停止・再生と音声の切り替えができます。</dd></div>
+          <div><dt>見出しの映り込み</dt><dd>PCでは、水面に映った見出しが映像と同じ四秒の周期でわずかに揺れます。</dd></div>
+          <div><dt>章の区切り線</dt><dd>各章の上の線は、画面に入ったときに一度だけ左から引かれます。文字は動かしません。</dd></div>
+          <div><dt>動きを減らす設定</dt><dd>端末で「視差効果を減らす」などを有効にしていると、映像は自動再生せず静止画で止まり、揺れと線の動きもなくなります。再生ボタンで見ることはできます。</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter on-light" id="notes" aria-labelledby="notes-title">
+    <span class="chapter__rule" aria-hidden="true"></span>
+    <div class="chapter__grid">
+      <h2 id="notes-title">この頁について</h2>
+      <ul class="notes">
+        <li>これは非公式・非商用のビジュアルデザイン研究です。一時的に公開している試作で、検索エンジンに登録しない設定（noindex）にしています。</li>
+        <li>特定の企業・ブランド・製品とは関係がなく、それらによる推奨や提携を示すものではありません。</li>
+        <li>商品の紹介・販売・購入、お問い合わせの機能はありません。</li>
+        <li>映像はユーザーから提供された素材です。左上のロゴは、この研究のための仮のものです。</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot on-dark">
+  <img src="../../assets/logo.svg" width="110" height="28" alt="Visual Study">
+  <p>非公式・非商用のビジュアルデザイン研究（一時公開）</p>
+  <p class="foot__powered">powered by RSS7.ai Works</p>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var video = document.getElementById('heroVideo');
+  var hero = document.getElementById('hero');
+  var bar = document.getElementById('bar');
+
+  /* ── Headline sits on the video's horizon (≈57.2% of the source frame) ── */
+  var HORIZON = 0.572, POS_Y = 0.6;
+  function placeHorizon() {
+    var W = hero.clientWidth, H = hero.clientHeight;
+    var vw = video.videoWidth || 720, vh = video.videoHeight || 1280;
+    var s = Math.max(W / vw, H / vh), dispH = vh * s;
+    var y = (H - dispH) * POS_Y + HORIZON * dispH;
+    var pct = Math.min(70, Math.max(34, y / H * 100));
+    hero.style.setProperty('--horizon', pct.toFixed(2) + '%');
+  }
+  placeHorizon();
+  video.addEventListener('loadedmetadata', placeHorizon);
+  window.addEventListener('resize', placeHorizon);
+
+  /* ── Play / pause ── */
+  var playBtn = document.getElementById('playBtn');
+  function syncPlay() {
+    var paused = video.paused;
+    playBtn.classList.toggle('is-on', paused);
+    playBtn.setAttribute('aria-label', paused ? '映像を再生' : '映像を一時停止');
+  }
+  playBtn.addEventListener('click', function () {
+    if (video.paused) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    else video.pause();
+  });
+  video.addEventListener('play', function () { syncPlay(); tick(); });
+  video.addEventListener('pause', syncPlay);
+  syncPlay();
+
+  /* ── Sound ── */
+  var soundBtn = document.getElementById('soundBtn');
+  var soundLabel = document.getElementById('soundLabel');
+  var noAudio = false;
+  function syncSound() {
+    if (noAudio) {
+      soundBtn.setAttribute('aria-disabled', 'true');
+      soundBtn.removeAttribute('aria-pressed');
+      soundBtn.setAttribute('aria-label', 'この映像には音声がありません');
+      soundLabel.textContent = '音声なし';
+      soundBtn.classList.remove('is-on');
+      return;
+    }
+    var on = !video.muted;
+    soundBtn.classList.toggle('is-on', on);
+    soundBtn.setAttribute('aria-pressed', String(on));
+    soundBtn.setAttribute('aria-label', '音声');
+    soundLabel.textContent = on ? '音声オン' : '音声オフ';
+  }
+  soundBtn.addEventListener('click', function () {
+    if (noAudio) return;
+    video.muted = !video.muted;
+    if (!video.muted && video.paused) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    syncSound();
+  });
+  video.addEventListener('volumechange', syncSound);
+  function detectAudio() {
+    if (typeof video.mozHasAudio === 'boolean') noAudio = !video.mozHasAudio;
+    else if (video.audioTracks) noAudio = video.audioTracks.length === 0;
+    else if (typeof video.webkitAudioDecodedByteCount === 'number' && video.currentTime > 0.8) noAudio = video.webkitAudioDecodedByteCount === 0;
+    syncSound();
+  }
+  video.addEventListener('loadedmetadata', detectAudio);
+  video.addEventListener('timeupdate', function once() {
+    if (video.currentTime > 0.8) { detectAudio(); video.removeEventListener('timeupdate', once); }
+  });
+  syncSound();
+
+  /* ── Loop position (hero bar + 四秒 chapter) ── */
+  var loopFill = document.getElementById('loopFill'), loopTime = document.getElementById('loopTime');
+  var clockFill = document.getElementById('clockFill'), clockRead = document.getElementById('clockRead');
+  var raf = 0;
+  function draw() {
+    var d = video.duration && isFinite(video.duration) ? video.duration : 4;
+    var t = video.currentTime % d, r = t / d;
+    loopFill.style.transform = clockFill.style.transform = 'scaleX(' + r.toFixed(4) + ')';
+    loopTime.textContent = t.toFixed(1) + ' / ' + d.toFixed(1) + ' 秒';
+    clockRead.textContent = t.toFixed(1);
+  }
+  function tick() {
+    cancelAnimationFrame(raf);
+    draw();
+    if (!video.paused) raf = requestAnimationFrame(tick);
+  }
+  video.addEventListener('seeked', draw);
+  video.addEventListener('loadedmetadata', draw);
+
+  /* ── Header: denser once the hero is behind it ── */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      bar.classList.toggle('is-solid', !es[0].isIntersecting);
+    }, { rootMargin: '-80px 0px 0px 0px' }).observe(hero);
+  }
+
+  /* ── Chapters: rule draws once, nav marks current chapter ── */
+  var chapters = [].slice.call(document.querySelectorAll('.chapter'));
+  var links = [].slice.call(document.querySelectorAll('.nav a'));
+  if ('IntersectionObserver' in window) {
+    var reveal = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); reveal.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    var current = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (a) {
+          if (a.getAttribute('href') === '#' + e.target.id) a.setAttribute('aria-current', 'location');
+          else a.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    chapters.forEach(function (c) { reveal.observe(c); current.observe(c); });
+    new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) links.forEach(function (a) { a.removeAttribute('aria-current'); });
+    }, { rootMargin: '-45% 0px -50% 0px' }).observe(hero);
+  } else {
+    chapters.forEach(function (c) { c.classList.add('is-in'); });
+  }
+
+  /* ── Mobile menu ── */
+  var menuBtn = document.querySelector('.menu-btn');
+  var nav = document.getElementById('site-nav');
+  function setMenu(open, returnFocus) {
+    menuBtn.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('is-open', open);
+    if (open) { var first = nav.querySelector('a'); if (first) first.focus(); }
+    else if (returnFocus) menuBtn.focus();
+  }
+  menuBtn.addEventListener('click', function () { setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false, true);
+  });
+  document.addEventListener('click', function (e) {
+    if (menuBtn.getAttribute('aria-expanded') === 'true' && !e.target.closest('.bar')) setMenu(false);
+  });
+  var narrow = window.matchMedia('(max-width: 720px)');
+  if (narrow.addEventListener) narrow.addEventListener('change', function () { setMenu(false); });
+
+  /* ── Reduced motion toggled while open ── */
+  if (reduce.addEventListener) reduce.addEventListener('change', function (e) { if (e.matches) video.pause(); });
+})();
+</script>
+</body>
+</html>
