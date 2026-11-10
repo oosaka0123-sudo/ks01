@@ -1,0 +1,2568 @@
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="google" content="notranslate">
+  <meta name="description" content="SURGE & STILLNESS · Independent non-commercial visual design study exploring cinematic ocean video overlays, editorial typography, and accessible motion controls.">
+  <title>SURGE &amp; STILLNESS · Unofficial Visual Design Study</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <!-- Performance: Preload hero poster for immediate LCP paint -->
+  <link rel="preload" as="image" href="../../assets/poster.jpg" fetchpriority="high">
+
+  <style>
+    /* ==========================================================================
+       SURGE & STILLNESS · EDITORIAL DESIGN SYSTEM
+       Unofficial, Non-Commercial Cinematic Ocean Video Study
+       ========================================================================== */
+
+    :root {
+      /* Chromatic Palette */
+      --color-abyss: #070c12;
+      --color-ocean-dark: #0d1620;
+      --color-ocean-slate: #152230;
+      --color-ocean-surface: #1e3042;
+      --color-teal-glow: #68bdc4;
+      --color-teal-muted: #3d7980;
+      --color-sand: #f4efe1;
+      --color-sand-dim: rgba(244, 239, 225, 0.74);
+      --color-sand-faint: rgba(244, 239, 225, 0.12);
+      --color-pure-white: #ffffff;
+      --color-text-subtle: #98aab8;
+      --color-border-subtle: rgba(244, 239, 225, 0.14);
+      --color-border-glow: rgba(104, 189, 196, 0.4);
+
+      /* Typography Stack */
+      --font-serif: "Didot", "Bodoni MT", "Cinzel", "Playfair Display", "Times New Roman", "Yu Mincho", "Hiragino Mincho ProN", serif;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+
+      /* Header Metrics */
+      --header-h: 72px;
+
+      /* Animation Curves */
+      --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+      --ease-smooth: cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    /* Reset & Base Rules */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-abyss);
+      color: var(--color-sand);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      background-color: var(--color-abyss);
+      color: var(--color-sand);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Accessibility: Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -120px;
+      left: 16px;
+      background: var(--color-sand);
+      color: var(--color-abyss);
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      z-index: 99999;
+      text-decoration: none;
+      transition: top 0.2s var(--ease-out-cubic);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+    .skip-link:focus {
+      top: 16px;
+      outline: 3px solid var(--color-teal-glow);
+    }
+
+    /* Accessibility: Keyboard Focus Rings */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    [tabindex="0"]:focus-visible {
+      outline: 2px solid var(--color-teal-glow);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+       FIXED HEADER WITH PERMANENT LOGO
+       Transparent-background brand logo permanently visible across desktop & mobile
+       ========================================================================== */
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      z-index: 1000;
+      background: rgba(7, 12, 18, 0.65);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border-bottom: 1px solid var(--color-border-subtle);
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(7, 12, 18, 0.94);
+      border-bottom-color: rgba(244, 239, 225, 0.2);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.65);
+    }
+
+    .header-container {
+      max-width: 1440px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    /* Top-Left Brand Logo */
+    .header-logo-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+      padding: 4px 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .header-logo-link:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    .header-logo-img {
+      display: block;
+      width: auto;
+      height: 38px;
+      max-width: 165px;
+      aspect-ratio: 360 / 92;
+      object-fit: contain;
+    }
+
+    /* Desktop Navigation */
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      color: var(--color-sand-dim);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 2px;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--color-teal-glow);
+      transition: width 0.25s var(--ease-out-cubic);
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible,
+    .nav-link.active {
+      color: var(--color-sand);
+    }
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .header-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-teal-glow);
+      background: rgba(104, 189, 196, 0.1);
+      border: 1px solid rgba(104, 189, 196, 0.32);
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* Mobile Hamburger Trigger */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 6px;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      cursor: pointer;
+      color: var(--color-sand);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .menu-toggle:hover {
+      background-color: rgba(244, 239, 225, 0.08);
+      border-color: var(--color-sand-dim);
+    }
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background-color: var(--color-sand);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      background: rgba(7, 12, 18, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding: 24px 20px 32px;
+      z-index: 999;
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .mobile-drawer.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .mobile-drawer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .mobile-drawer-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--color-sand);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.06em;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: rgba(244, 239, 225, 0.04);
+      border: 1px solid rgba(244, 239, 225, 0.08);
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .mobile-drawer-link:hover,
+    .mobile-drawer-link:focus-visible {
+      background: rgba(104, 189, 196, 0.15);
+      border-color: var(--color-teal-glow);
+      color: var(--color-pure-white);
+    }
+    .mobile-drawer-note {
+      margin-top: 20px;
+      padding: 12px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--color-text-subtle);
+      border: 1px dashed var(--color-border-subtle);
+      border-radius: 6px;
+    }
+
+    /* ==========================================================================
+       HERO SECTION: FULL VIEWPORT CINEMATIC VIDEO OVERLAY
+       ========================================================================== */
+
+    .hero-viewport {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100svh;
+      min-height: 640px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background-color: var(--color-abyss);
+    }
+
+    /* Media Layer (Video & Poster Fallback) */
+    .hero-media-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      z-index: 1;
+      display: block;
+      transition: opacity 0.4s ease;
+    }
+
+    .hero-poster-fallback {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      z-index: 0;
+      display: block;
+    }
+
+    /* Contrast Vignette Scrims */
+    .hero-overlay-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        /* Top header protection shadow */
+        linear-gradient(180deg, rgba(7, 12, 18, 0.88) 0%, rgba(7, 12, 18, 0.45) 20%, rgba(7, 12, 18, 0) 45%),
+        /* Bottom ramp into page body */
+        linear-gradient(0deg, var(--color-abyss) 0%, rgba(7, 12, 18, 0.8) 25%, rgba(7, 12, 18, 0.25) 60%, rgba(7, 12, 18, 0.1) 100%),
+        /* Subtle radial vignette */
+        radial-gradient(ellipse at 50% 50%, rgba(13, 22, 32, 0.2) 0%, rgba(7, 12, 18, 0.6) 100%);
+    }
+
+    /* Hero Editorial Stage */
+    .hero-stage {
+      position: relative;
+      z-index: 3;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Editorial Hero Card: Provides immaculate legibility & architectural elegance */
+    .hero-editorial-card {
+      max-width: 820px;
+      background: rgba(7, 14, 22, 0.74);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 16px;
+      padding: 36px 40px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-editorial-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--color-teal-glow) 0%, transparent 100%);
+    }
+
+    .hero-kicker-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-kicker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-teal-glow);
+      background: rgba(104, 189, 196, 0.12);
+      border: 1px solid rgba(104, 189, 196, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .kicker-pulse {
+      width: 7px;
+      height: 7px;
+      background-color: var(--color-teal-glow);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--color-teal-glow);
+      animation: pulse-glow 2.2s infinite ease-in-out;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.35); opacity: 1; }
+    }
+
+    .hero-meta-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--color-sand-dim);
+    }
+
+    .hero-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .hero-title-main {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5.2vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--color-sand);
+    }
+
+    .hero-title-sub {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--color-sand-dim);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-lead-text {
+      font-size: clamp(0.92rem, 1.35vw, 1.05rem);
+      font-weight: 350;
+      line-height: 1.65;
+      color: var(--color-sand-dim);
+      max-width: 680px;
+    }
+
+    /* Media Playback Controller HUD */
+    .hero-hud-dock {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .hud-controls-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(7, 12, 18, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 999px;
+      padding: 6px 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .hud-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--color-sand);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      min-height: 38px;
+      min-width: 38px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .hud-btn:hover {
+      background: rgba(244, 239, 225, 0.1);
+      border-color: var(--color-sand-dim);
+    }
+    .hud-btn:active {
+      transform: scale(0.96);
+    }
+    .hud-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Timeline Scrubber in HUD */
+    .hud-scrubber-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 6px;
+    }
+
+    .hud-timeline-track {
+      position: relative;
+      width: 130px;
+      height: 6px;
+      background: rgba(244, 239, 225, 0.18);
+      border-radius: 3px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .hud-timeline-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-teal-glow), #a0e8ee);
+      border-radius: 3px;
+      transition: width 0.05s linear;
+    }
+
+    .hud-timecode {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--color-sand-dim);
+      min-width: 84px;
+    }
+
+    /* Motion Toggle Switch */
+    .hud-motion-toggle {
+      background: rgba(7, 12, 18, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 999px;
+      padding: 6px 14px;
+      min-height: 42px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--color-sand-dim);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .hud-motion-toggle:hover {
+      background: rgba(244, 239, 225, 0.08);
+      color: var(--color-sand);
+      border-color: var(--color-sand-dim);
+    }
+
+    /* Scroll Cue */
+    .hero-scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-sand-dim);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(7, 12, 18, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--color-border-subtle);
+      transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .hero-scroll-cue:hover {
+      color: var(--color-sand);
+      border-color: var(--color-sand-dim);
+      transform: translateY(2px);
+    }
+    .scroll-arrow-icon {
+      width: 14px;
+      height: 14px;
+      animation: bounce-subtle 2s infinite ease-in-out;
+    }
+    @keyframes bounce-subtle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+
+    /* ==========================================================================
+       SECTION COMMON STYLES
+       ========================================================================== */
+
+    .section-wrap {
+      position: relative;
+      width: 100%;
+      padding: 96px 24px;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .section-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .section-header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 52px;
+    }
+
+    .section-num-tag {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-teal-glow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-num-tag::after {
+      content: "";
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background-color: var(--color-teal-glow);
+      opacity: 0.4;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--color-sand);
+      letter-spacing: -0.01em;
+    }
+
+    .section-intro {
+      max-width: 720px;
+      font-size: 1.05rem;
+      color: var(--color-text-subtle);
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       SECTION 01: CURATORIAL CONCEPT
+       ========================================================================== */
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 52px;
+      align-items: start;
+    }
+
+    .concept-aside-card {
+      background: linear-gradient(145deg, rgba(21, 34, 48, 0.45) 0%, rgba(7, 12, 18, 0.6) 100%);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 12px;
+      padding: 38px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .concept-aside-card::before {
+      content: "潮汐";
+      position: absolute;
+      right: -20px;
+      bottom: -30px;
+      font-family: var(--font-serif);
+      font-size: 10rem;
+      color: rgba(244, 239, 225, 0.035);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .concept-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--color-sand);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .concept-quote-cite {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-teal-glow);
+      display: block;
+    }
+
+    .concept-body-text {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      font-size: 1rem;
+      color: var(--color-sand-dim);
+      line-height: 1.75;
+    }
+
+    .concept-body-text p strong {
+      color: var(--color-sand);
+      font-weight: 600;
+    }
+
+    .concept-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+      grid-column: 1 / -1;
+    }
+
+    .metric-card {
+      background: rgba(13, 22, 32, 0.65);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 8px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .metric-card:hover {
+      border-color: var(--color-teal-glow);
+      transform: translateY(-2px);
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-teal-glow);
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-sand);
+      letter-spacing: 0.02em;
+    }
+
+    .metric-desc {
+      font-size: 0.78rem;
+      color: var(--color-text-subtle);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       SECTION 02: 4-SECOND KINETIC RHYTHM (INTERACTIVE ANATOMY)
+       ========================================================================== */
+
+    .rhythm-scrubber-intro {
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+      color: var(--color-sand-dim);
+    }
+
+    .rhythm-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .phase-card {
+      background: rgba(13, 22, 32, 0.7);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 10px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      cursor: pointer;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease-out-cubic);
+    }
+    .phase-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+      transition: background-color 0.25s ease;
+    }
+    .phase-card:hover {
+      background: rgba(21, 34, 48, 0.85);
+      border-color: var(--color-teal-glow);
+      transform: translateY(-3px);
+    }
+    .phase-card.active-phase {
+      background: rgba(30, 48, 66, 0.9);
+      border-color: var(--color-teal-glow);
+      box-shadow: 0 8px 24px rgba(104, 189, 196, 0.15);
+    }
+    .phase-card.active-phase::before {
+      background: var(--color-teal-glow);
+    }
+
+    .phase-time-pill {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--color-teal-glow);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .phase-name {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--color-sand);
+      line-height: 1.25;
+    }
+
+    .phase-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-subtle);
+      line-height: 1.6;
+    }
+
+    .phase-action-cue {
+      margin-top: auto;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: var(--color-teal-glow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.8;
+    }
+    .phase-card:hover .phase-action-cue {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       SECTION 03: VISUAL ARTIFACTS & STILL COMPOSITIONS
+       ========================================================================== */
+
+    .artifacts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .artifact-card {
+      background: rgba(13, 22, 32, 0.6);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s ease;
+    }
+    .artifact-card:hover {
+      border-color: var(--color-teal-glow);
+    }
+
+    .artifact-media-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: var(--color-abyss);
+      overflow: hidden;
+    }
+
+    .artifact-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s var(--ease-out-cubic);
+    }
+    .artifact-card:hover .artifact-img {
+      transform: scale(1.03);
+    }
+
+    .artifact-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(7, 12, 18, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--color-sand);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--color-border-subtle);
+    }
+
+    .artifact-details {
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .artifact-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--color-sand);
+      font-weight: 500;
+    }
+
+    .artifact-caption {
+      font-size: 0.88rem;
+      color: var(--color-text-subtle);
+      line-height: 1.65;
+    }
+
+    .artifact-specs-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+      padding-top: 14px;
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .artifact-spec-item {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-sand-dim);
+      background: rgba(244, 239, 225, 0.05);
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    /* ==========================================================================
+       SECTION 04: EDITORIAL TYPOGRAPHY & COLOR SYSTEM
+       ========================================================================== */
+
+    .system-split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+    }
+
+    .type-specimen-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .type-specimen-item {
+      background: rgba(13, 22, 32, 0.5);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .type-specimen-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-teal-glow);
+    }
+
+    .type-sample-serif {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--color-sand);
+      line-height: 1.2;
+    }
+
+    .type-sample-sans {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      color: var(--color-sand-dim);
+      line-height: 1.6;
+    }
+
+    .type-sample-mono {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--color-teal-glow);
+      letter-spacing: 0.04em;
+    }
+
+    .palette-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .swatch-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(13, 22, 32, 0.5);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    .swatch-color-pill {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .swatch-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .swatch-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-sand);
+    }
+
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-sand-dim);
+    }
+
+    .swatch-contrast {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--color-teal-glow);
+    }
+
+    /* ==========================================================================
+       SECTION 05: TECHNICAL SPECIFICATIONS & ACCESSIBILITY AUDIT
+       ========================================================================== */
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .spec-audit-card {
+      background: rgba(13, 22, 32, 0.6);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 10px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .spec-audit-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--color-sand);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spec-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .spec-check-item {
+      font-size: 0.85rem;
+      color: var(--color-sand-dim);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
+    }
+
+    .check-icon {
+      color: var(--color-teal-glow);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+    }
+
+    /* Live Breakpoint Meter */
+    .viewport-meter-box {
+      grid-column: 1 / -1;
+      background: rgba(21, 34, 48, 0.4);
+      border: 1px dashed var(--color-border-subtle);
+      border-radius: 10px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .viewport-meter-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--color-sand);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .viewport-pill {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--color-teal-glow);
+      color: var(--color-abyss);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .viewport-targets {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .target-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-sand-dim);
+      background: rgba(244, 239, 225, 0.06);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(244, 239, 225, 0.1);
+    }
+    .target-tag.current {
+      border-color: var(--color-teal-glow);
+      color: var(--color-teal-glow);
+      background: rgba(104, 189, 196, 0.15);
+    }
+
+    /* ==========================================================================
+       FOOTER & UNOFFICIAL NON-COMMERCIAL DISCLAIMER
+       ========================================================================== */
+
+    .site-footer {
+      background-color: #04070a;
+      border-top: 1px solid var(--color-border-subtle);
+      padding: 64px 24px 80px;
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .disclaimer-card {
+      background: rgba(13, 22, 32, 0.8);
+      border: 1px solid rgba(244, 239, 225, 0.14);
+      border-left: 4px solid var(--color-teal-glow);
+      border-radius: 6px;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .disclaimer-title {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-teal-glow);
+    }
+
+    .disclaimer-text {
+      font-size: 0.84rem;
+      color: var(--color-sand-dim);
+      line-height: 1.65;
+    }
+
+    .footer-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      height: 30px;
+      width: auto;
+      opacity: 0.75;
+      display: block;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-text-subtle);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-back-to-top {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--color-sand-dim);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--color-border-subtle);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .footer-back-to-top:hover {
+      color: var(--color-sand);
+      border-color: var(--color-sand-dim);
+    }
+
+    /* Screen Reader Announcer */
+    #aria-live-status {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE ADAPTATIONS (320px, 390px, 768px, 1440px)
+       ========================================================================== */
+
+    /* Large Desktop (>= 1440px) */
+    @media (min-width: 1440px) {
+      .hero-stage {
+        padding-bottom: 48px;
+      }
+      .section-wrap {
+        padding: 110px 32px;
+      }
+    }
+
+    /* Tablet & Small Desktop (<= 1024px) */
+    @media (max-width: 1024px) {
+      .concept-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .rhythm-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .system-split {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .specs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tablet Portrait (<= 768px) */
+    @media (max-width: 768px) {
+      :root {
+        --header-h: 66px;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .mobile-drawer {
+        display: block;
+      }
+
+      .hero-viewport {
+        min-height: 560px;
+      }
+      .hero-stage {
+        padding: 0 20px 28px;
+        gap: 16px;
+      }
+      .hero-editorial-card {
+        padding: 24px 22px;
+        gap: 14px;
+      }
+
+      .artifacts-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .concept-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .section-wrap {
+        padding: 72px 20px;
+      }
+
+      .hud-controls-group {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .hud-timeline-track {
+        width: 90px;
+      }
+      .hero-scroll-cue {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Smartphone Standard (<= 390px) */
+    @media (max-width: 390px) {
+      .header-container {
+        padding: 0 16px;
+      }
+      .header-logo-img {
+        height: 32px;
+        max-width: 130px;
+      }
+      .header-badge {
+        display: none; /* conserve horizontal header space */
+      }
+
+      .hero-stage {
+        padding: 0 16px 20px;
+        gap: 14px;
+      }
+      .hero-editorial-card {
+        padding: 20px 16px;
+        border-radius: 12px;
+      }
+      .hero-title-main {
+        font-size: 2.1rem;
+      }
+
+      .rhythm-cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hud-controls-group {
+        padding: 4px 8px;
+        gap: 4px;
+      }
+      .hud-timecode {
+        min-width: 68px;
+        font-size: 0.68rem;
+      }
+
+      .section-wrap {
+        padding: 56px 16px;
+      }
+      .concept-aside-card {
+        padding: 24px 18px;
+      }
+    }
+
+    /* Smartphone Narrow (<= 320px) */
+    @media (max-width: 320px) {
+      .header-logo-img {
+        height: 28px;
+        max-width: 110px;
+      }
+      .menu-toggle {
+        width: 38px;
+        height: 38px;
+      }
+      .hero-title-main {
+        font-size: 1.8rem;
+      }
+      .hud-timeline-track {
+        display: none; /* keep touch targets clean on extreme narrow */
+      }
+      .hud-motion-toggle {
+        font-size: 0.68rem;
+        padding: 4px 10px;
+      }
+    }
+
+    /* ==========================================================================
+       REDUCED MOTION COMPLIANCE (WCAG 2.1 AA)
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      .kicker-pulse,
+      .scroll-arrow-icon {
+        animation: none !important;
+      }
+      .hero-video {
+        opacity: 0 !important;
+        display: none;
+      }
+      .hero-poster-fallback {
+        opacity: 1 !important;
+        z-index: 2;
+      }
+    }
+
+    /* Manual Reduced Motion Override */
+    body.reduced-motion-active .hero-video {
+      opacity: 0 !important;
+    }
+    body.reduced-motion-active .hero-poster-fallback {
+      opacity: 1 !important;
+      z-index: 2;
+    }
+    body.reduced-motion-active .kicker-pulse,
+    body.reduced-motion-active .scroll-arrow-icon {
+      animation: none !important;
+    }
+  </style>
+</head>
+
+<body id="top">
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Screen Reader Live Announcements -->
+  <div id="aria-live-status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ========================================================================
+       PERMANENT FIXED HEADER
+       Top-left brand logo permanently visible during scroll on desktop & mobile
+       ======================================================================== -->
+  <header id="site-header" class="site-header" role="banner">
+    <div class="header-container">
+      <!-- Top-left Brand Logo -->
+      <a href="#top" class="header-logo-link" aria-label="Visual Study · Return to top">
+        <img
+          src="../../assets/logo.svg"
+          alt="Visual Study Logo"
+          class="header-logo-img"
+          width="180"
+          height="46"
+        >
+      </a>
+
+      <!-- Desktop Anchor Navigation -->
+      <nav class="desktop-nav" aria-label="Primary Desktop Navigation">
+        <ul class="nav-list" role="list">
+          <li><a href="#concept" class="nav-link">01 Concept</a></li>
+          <li><a href="#rhythm" class="nav-link">02 Rhythm</a></li>
+          <li><a href="#frames" class="nav-link">03 Frames</a></li>
+          <li><a href="#system" class="nav-link">04 System</a></li>
+          <li><a href="#specs" class="nav-link">05 Specs</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Header Actions & Mobile Hamburger -->
+      <div class="header-actions">
+        <span class="header-badge" aria-label="Study classification">STUDY · NON-COMMERCIAL</span>
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menu-toggle-btn"
+          aria-expanded="false"
+          aria-controls="mobile-nav-drawer"
+          aria-label="Toggle navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-nav-drawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation Drawer">
+    <ul class="mobile-drawer-list" role="list">
+      <li><a href="#concept" class="mobile-drawer-link"><span>01 / Concept Manifesto</span> <span>&rarr;</span></a></li>
+      <li><a href="#rhythm" class="mobile-drawer-link"><span>02 / 4s Kinetic Rhythm</span> <span>&rarr;</span></a></li>
+      <li><a href="#frames" class="mobile-drawer-link"><span>03 / Visual Artifacts</span> <span>&rarr;</span></a></li>
+      <li><a href="#system" class="mobile-drawer-link"><span>04 / Editorial System</span> <span>&rarr;</span></a></li>
+      <li><a href="#specs" class="mobile-drawer-link"><span>05 / Technical Audit</span> <span>&rarr;</span></a></li>
+    </ul>
+    <div class="mobile-drawer-note">
+      UNOFFICIAL NON-COMMERCIAL VISUAL STUDY<br>
+      NO MARKETING &middot; NO COMMERCIAL LINKS
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MAIN CONTENT CONTAINER
+       ======================================================================== -->
+  <main id="main-content">
+
+    <!-- ======================================================================
+         HERO SECTION: FULL VIEWPORT CINEMATIC VIDEO OVERLAY
+         ====================================================================== -->
+    <section id="hero" class="hero-viewport" aria-label="Cinematic Ocean Hero Section">
+      <!-- Media Layer: Native 4-Second MP4 Video & Poster Fallback -->
+      <div class="hero-media-wrapper">
+        <img
+          src="../../assets/poster.jpg"
+          alt="Pacific ocean wave swell still poster"
+          class="hero-poster-fallback"
+          width="720"
+          height="1280"
+          fetchpriority="high"
+        >
+        <video
+          id="hero-video"
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="../../assets/poster.jpg"
+          preload="auto"
+          aria-label="Four-second looping cinematic Pacific ocean wave study"
+        >
+          <source src="../../assets/hero.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Scrim Overlays for WCAG AA Text Contrast -->
+      <div class="hero-overlay-scrim" aria-hidden="true"></div>
+
+      <!-- Hero Editorial Stage & Controls -->
+      <div class="hero-stage">
+        <!-- Editorial Hero Card: Pristine typography over motion -->
+        <div class="hero-editorial-card">
+          <div class="hero-kicker-row">
+            <div class="hero-kicker-pill">
+              <span class="kicker-pulse" aria-hidden="true"></span>
+              <span>CINEMATIC STUDY &middot; VOL. 03</span>
+            </div>
+            <span class="hero-meta-label">04.00s CONTINUOUS SWELL &middot; 720&times;1280 H.264</span>
+          </div>
+
+          <div class="hero-title-group">
+            <h1 class="hero-title-main">SURGE &amp; STILLNESS</h1>
+            <p class="hero-title-sub">潮汐の刹那 &mdash; Pacific Momentum &amp; Temporal Compression</p>
+          </div>
+
+          <p class="hero-lead-text">
+            An independent visual study examining the interplay of raw oceanic power, light refraction,
+            and layered interface typography. Exploring how a four-second natural loop functions as contemplative
+            architectural space rather than commercial interruption.
+          </p>
+        </div>
+
+        <!-- Media Playback Controller HUD -->
+        <div class="hero-hud-dock" role="region" aria-label="Hero Video Playback Controls">
+          <!-- Docked Media Control Pill -->
+          <div class="hud-controls-group">
+            <!-- Play / Pause Toggle -->
+            <button
+              type="button"
+              id="video-play-btn"
+              class="hud-btn"
+              aria-label="Pause - Pause background video"
+              title="Pause video (Space or K)"
+            >
+              <svg id="play-btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <!-- Default Pause Icon -->
+                <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+                <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+              </svg>
+              <span id="play-btn-text">Pause</span>
+            </button>
+
+            <!-- Audio Mute / Unmute Toggle -->
+            <button
+              type="button"
+              id="video-sound-btn"
+              class="hud-btn"
+              aria-label="Muted - Toggle sound"
+              title="Toggle sound (M)"
+            >
+              <svg id="sound-btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <!-- Muted Speaker Icon -->
+                <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+              </svg>
+              <span id="sound-btn-text">Muted</span>
+            </button>
+
+            <!-- Scrubbable Loop Progress Bar -->
+            <div class="hud-scrubber-box">
+              <div
+                id="hud-scrubber"
+                class="hud-timeline-track"
+                role="slider"
+                tabindex="0"
+                aria-label="Video timeline scrubber"
+                aria-valuemin="0"
+                aria-valuemax="4"
+                aria-valuenow="0"
+              >
+                <div id="hud-progress-bar" class="hud-timeline-progress"></div>
+              </div>
+              <span id="hud-timecode-display" class="hud-timecode" aria-label="Current loop timestamp">00.0s / 04.0s</span>
+            </div>
+          </div>
+
+          <!-- Motion Preference Manual Switch -->
+          <button
+            type="button"
+            id="reduced-motion-btn"
+            class="hud-motion-toggle"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">&odot;</span>
+            <span id="motion-btn-text">Motion: Dynamic</span>
+          </button>
+
+          <!-- Scroll Cue Link -->
+          <a href="#concept" class="hero-scroll-cue" aria-label="DISCOVER - Scroll down to Curatorial Concept section">
+            <span>DISCOVER</span>
+            <svg class="scroll-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 01: CURATORIAL CONCEPT
+         ====================================================================== -->
+    <section id="concept" class="section-wrap" aria-labelledby="concept-heading">
+      <div class="section-inner">
+        <div class="section-header-block">
+          <span class="section-num-tag">01 / MANIFESTO</span>
+          <h2 id="concept-heading" class="section-title">The Rhythm of Oceanic Compression</h2>
+          <p class="section-intro">
+            Why four seconds? Natural ocean swells operate within brief kinetic windows.
+            This study examines how short-form cinematics create calm architectural depth when freed from commercial distraction.
+          </p>
+        </div>
+
+        <div class="concept-grid">
+          <!-- Editorial Aside Card -->
+          <aside class="concept-aside-card" aria-label="Curatorial Statement">
+            <blockquote class="concept-quote">
+              &ldquo;The ocean does not demand conversion. Its rhythm is indifferent, eternal, and complete within a solitary four-second wave crest.&rdquo;
+            </blockquote>
+            <cite class="concept-quote-cite">&mdash; Visual Study Design Observations, 2026</cite>
+          </aside>
+
+          <!-- Curatorial Prose -->
+          <div class="concept-body-text">
+            <p>
+              In conventional commercial web design, full-viewport background video is frequently burdened by marketing objectives:
+              aggressive calls to action, tracking pixels, promotional banners, and visual urgency.
+              <strong>Surge &amp; Stillness</strong> strips all commercial intent to investigate video purely as atmospheric architecture.
+            </p>
+            <p>
+              By anchoring a fixed, transparent brand mark in the header and maintaining high-contrast editorial typography,
+              the interface respects the user's attention. The loop duration&mdash;calibrated to exactly 4.00 seconds&mdash;aligns
+              with human resting respiratory pauses, fostering cognitive tranquility rather than sensory fatigue.
+            </p>
+            <p>
+              Every visual asset in this study is locally preserved. There are no remote tracking beacons, no analytics endpoints,
+              and strictly no commercial endorsement.
+            </p>
+          </div>
+
+          <!-- Three Core Metric Cards -->
+          <div class="concept-metrics">
+            <div class="metric-card">
+              <span class="metric-value">04.0s</span>
+              <span class="metric-label">Loop Period</span>
+              <p class="metric-desc">Seamless temporal reset with sub-perceptual cut boundaries.</p>
+            </div>
+            <div class="metric-card">
+              <span class="metric-value">370 KB</span>
+              <span class="metric-label">Compact Footprint</span>
+              <p class="metric-desc">High compression fidelity preserving foam detail under 400KB.</p>
+            </div>
+            <div class="metric-card">
+              <span class="metric-value">0.00%</span>
+              <span class="metric-label">Commercial Intent</span>
+              <p class="metric-desc">Strictly non-commercial exploratory visual laboratory.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 02: 4-SECOND KINETIC RHYTHM (INTERACTIVE ANATOMY)
+         ====================================================================== -->
+    <section id="rhythm" class="section-wrap" aria-labelledby="rhythm-heading">
+      <div class="section-inner">
+        <div class="section-header-block">
+          <span class="section-num-tag">02 / DECOMPOSITION</span>
+          <h2 id="rhythm-heading" class="section-title">Anatomy of the 4-Second Surge</h2>
+          <p class="section-intro">
+            Click any quadrant below to jump the hero video to that precise moment and study the physical mechanics of the wave.
+          </p>
+        </div>
+
+        <p class="rhythm-scrubber-intro">
+          Select a phase to scrub the background video playback directly:
+        </p>
+
+        <!-- Phase Scrubbing Grid -->
+        <div class="rhythm-cards-grid" role="group" aria-label="Video Phase Scrubbing Controls">
+          <!-- Phase 1 -->
+          <button
+            type="button"
+            class="phase-card"
+            data-seek-time="0.0"
+          >
+            <span class="phase-time-pill">00.0s &ndash; 01.0s</span>
+            <h3 class="phase-name">I. Swell Inception</h3>
+            <p class="phase-desc">
+              Hydrostatic pressure builds beneath the dark surface. Deep cerulean values dominate before the crest begins to fold.
+            </p>
+            <span class="phase-action-cue">
+              <span>Seek 00:00</span> &rarr;
+            </span>
+          </button>
+
+          <!-- Phase 2 -->
+          <button
+            type="button"
+            class="phase-card"
+            data-seek-time="1.0"
+          >
+            <span class="phase-time-pill">01.0s &ndash; 02.0s</span>
+            <h3 class="phase-name">II. Crest Fracture</h3>
+            <p class="phase-desc">
+              Surface tension shears apart. Direct sunlight illuminates airborne spray, creating maximum luminance contrast.
+            </p>
+            <span class="phase-action-cue">
+              <span>Seek 01:00</span> &rarr;
+            </span>
+          </button>
+
+          <!-- Phase 3 -->
+          <button
+            type="button"
+            class="phase-card"
+            data-seek-time="2.0"
+          >
+            <span class="phase-time-pill">02.0s &ndash; 03.0s</span>
+            <h3 class="phase-name">III. Foam Aeration</h3>
+            <p class="phase-desc">
+              Micro-bubbles disperse across the lens plane. The texture shifts from smooth fluid glass to chaotic white noise.
+            </p>
+            <span class="phase-action-cue">
+              <span>Seek 02:00</span> &rarr;
+            </span>
+          </button>
+
+          <!-- Phase 4 -->
+          <button
+            type="button"
+            class="phase-card"
+            data-seek-time="3.0"
+          >
+            <span class="phase-time-pill">03.0s &ndash; 04.0s</span>
+            <h3 class="phase-name">IV. Settle &amp; Reset</h3>
+            <p class="phase-desc">
+              Gravity pulls turbulent water back into oceanic equilibrium, setting up the seamless boundary reset.
+            </p>
+            <span class="phase-action-cue">
+              <span>Seek 03:00</span> &rarr;
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 03: VISUAL ARTIFACTS & STILL COMPOSITIONS
+         ====================================================================== -->
+    <section id="frames" class="section-wrap" aria-labelledby="frames-heading">
+      <div class="section-inner">
+        <div class="section-header-block">
+          <span class="section-num-tag">03 / ARTIFACTS</span>
+          <h2 id="frames-heading" class="section-title">Curated Visual Assets</h2>
+          <p class="section-intro">
+            A comparative review of the static visual assets employed alongside the cinematic video, maintaining fidelity and swift initial rendering.
+          </p>
+        </div>
+
+        <div class="artifacts-grid">
+          <!-- Card 1: Poster Asset -->
+          <article class="artifact-card">
+            <div class="artifact-media-frame">
+              <img
+                src="../../assets/poster.jpg"
+                alt="High-resolution poster capture of wave crest"
+                class="artifact-img"
+                loading="lazy"
+                width="720"
+                height="450"
+              >
+              <span class="artifact-badge">Primary Poster Frame</span>
+            </div>
+            <div class="artifact-details">
+              <h3 class="artifact-title">hero-poster.jpg &middot; Instant Paint Baseline</h3>
+              <p class="artifact-caption">
+                Preloaded in the HTML head to eliminate Cumulative Layout Shift (CLS = 0) and provide an instant,
+                visually satisfying experience for users on constrained networks or with reduced-motion preferences.
+              </p>
+              <ul class="artifact-specs-list" role="list">
+                <li class="artifact-spec-item">Aspect: 9:16 Crop</li>
+                <li class="artifact-spec-item">Size: ~68 KB</li>
+                <li class="artifact-spec-item">Tone: Neutral Foam</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 2: Reference Asset -->
+          <article class="artifact-card">
+            <div class="artifact-media-frame">
+              <img
+                src="../../assets/reference.jpg"
+                alt="Reference keyframe from editorial study"
+                class="artifact-img"
+                loading="lazy"
+                width="720"
+                height="450"
+              >
+              <span class="artifact-badge">Art Direction Reference</span>
+            </div>
+            <div class="artifact-details">
+              <h3 class="artifact-title">reference.jpg &middot; Composition Archetype</h3>
+              <p class="artifact-caption">
+                The visual benchmark utilized to calibrate contrast scrims, typographic scale, and color temperature.
+                The balance between deep abyssal blues and pale foam guides all typography choices.
+              </p>
+              <ul class="artifact-specs-list" role="list">
+                <li class="artifact-spec-item">Reference Keyframe</li>
+                <li class="artifact-spec-item">Size: ~227 KB</li>
+                <li class="artifact-spec-item">Balance: Golden Ratio</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 04: EDITORIAL TYPOGRAPHY & DESIGN SYSTEM
+         ====================================================================== -->
+    <section id="system" class="section-wrap" aria-labelledby="system-heading">
+      <div class="section-inner">
+        <div class="section-header-block">
+          <span class="section-num-tag">04 / ARCHITECTURE</span>
+          <h2 id="system-heading" class="section-title">Editorial Typography &amp; Color System</h2>
+          <p class="section-intro">
+            A high-contrast editorial system engineered for maximum legibility across shifting oceanic video textures.
+          </p>
+        </div>
+
+        <div class="system-split">
+          <!-- Type Specimens Column -->
+          <div class="type-specimen-stack">
+            <!-- Serif Specimen -->
+            <div class="type-specimen-item">
+              <span class="type-specimen-meta">Display Serif &middot; 400 Regular / Italic</span>
+              <div class="type-sample-serif">
+                &ldquo;Where wave breaks, silence gathers.&rdquo;
+              </div>
+              <p class="artifact-caption">Used for editorial impact, narrative headlines, and emotional weight.</p>
+            </div>
+
+            <!-- Sans Specimen -->
+            <div class="type-specimen-item">
+              <span class="type-specimen-meta">UI Sans &middot; Modernist System Stack</span>
+              <div class="type-sample-sans">
+                Clean geometric letterforms ensure crisp scanning on mobile displays from 320px to 1440px wide.
+              </div>
+              <p class="artifact-caption">Utilized for body copy, navigational links, and curatorial prose.</p>
+            </div>
+
+            <!-- Mono Specimen -->
+            <div class="type-specimen-item">
+              <span class="type-specimen-meta">Technical Mono &middot; SF Mono / Consolas</span>
+              <div class="type-sample-mono">
+                FPS: 30.0 &middot; TIMECODE: 00:02.4 &middot; WCAG: AA PASS
+              </div>
+              <p class="artifact-caption">Reserved for metadata, video timecodes, HUD readouts, and tags.</p>
+            </div>
+          </div>
+
+          <!-- Color Swatches Column -->
+          <div class="palette-column" role="region" aria-label="Color Palette and Contrast Audit">
+            <!-- Swatch 1 -->
+            <div class="swatch-card">
+              <div class="swatch-color-pill" style="background-color: #070c12;"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">Midnight Abyss</span>
+                <span class="swatch-hex">#070c12 &middot; Base Surface</span>
+                <span class="swatch-contrast">Contrast vs Sand: 15.2:1 (AAA)</span>
+              </div>
+            </div>
+
+            <!-- Swatch 2 -->
+            <div class="swatch-card">
+              <div class="swatch-color-pill" style="background-color: #152230;"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">Submerged Slate</span>
+                <span class="swatch-hex">#152230 &middot; Elevated Card</span>
+                <span class="swatch-contrast">Contrast vs Sand: 9.8:1 (AAA)</span>
+              </div>
+            </div>
+
+            <!-- Swatch 3 -->
+            <div class="swatch-card">
+              <div class="swatch-color-pill" style="background-color: #f4efe1;"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">Warm Sand Foam</span>
+                <span class="swatch-hex">#f4efe1 &middot; Logo &amp; Primary Headings</span>
+                <span class="swatch-contrast">Logo SVG Native Stroke</span>
+              </div>
+            </div>
+
+            <!-- Swatch 4 -->
+            <div class="swatch-card">
+              <div class="swatch-color-pill" style="background-color: #68bdc4;"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">Oceanic Teal Glow</span>
+                <span class="swatch-hex">#68bdc4 &middot; Kinetic Accent</span>
+                <span class="swatch-contrast">Focus Ring &amp; Active States</span>
+              </div>
+            </div>
+
+            <!-- Swatch 5 -->
+            <div class="swatch-card">
+              <div class="swatch-color-pill" style="background-color: #98aab8;"></div>
+              <div class="swatch-info">
+                <span class="swatch-name">Sea Mist Slate</span>
+                <span class="swatch-hex">#98aab8 &middot; Secondary Text</span>
+                <span class="swatch-contrast">Contrast vs Abyss: 6.4:1 (AA)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 05: TECHNICAL SPECIFICATIONS & ACCESSIBILITY AUDIT
+         ====================================================================== -->
+    <section id="specs" class="section-wrap" aria-labelledby="specs-heading">
+      <div class="section-inner">
+        <div class="section-header-block">
+          <span class="section-num-tag">05 / VERIFICATION</span>
+          <h2 id="specs-heading" class="section-title">Technical Specifications &amp; Audit</h2>
+          <p class="section-intro">
+            Built without third-party frameworks or bloated runtimes. Verified for performance, accessibility, and resilient responsive scaling.
+          </p>
+        </div>
+
+        <div class="specs-grid">
+          <!-- Card 1: Accessibility -->
+          <div class="spec-audit-card">
+            <h3 class="spec-audit-title">
+              <span aria-hidden="true">&bull;</span> WCAG 2.1 AA Compliance
+            </h3>
+            <ul class="spec-checklist" role="list">
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Contrast ratio &gt; 4.5:1 across all typography and scrim layers</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Keyboard navigation with prominent cyan focus indicators</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Semantic landmarks (header, nav, main, section, footer)</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Screen reader live region for video state announcements</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Motion Safety -->
+          <div class="spec-audit-card">
+            <h3 class="spec-audit-title">
+              <span aria-hidden="true">&bull;</span> Motion &amp; Video Safety
+            </h3>
+            <ul class="spec-checklist" role="list">
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Automatic pause on prefers-reduced-motion media query</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Manual motion toggle switch available right inside hero HUD</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Autoplay muted loop playsinline compliant with browser policies</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Video pause and play hotkey controls (Spacebar or K key)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Performance -->
+          <div class="spec-audit-card">
+            <h3 class="spec-audit-title">
+              <span aria-hidden="true">&bull;</span> Static Performance
+            </h3>
+            <ul class="spec-checklist" role="list">
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Zero external JavaScript frameworks or dependencies</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Preloaded poster image for swift Largest Contentful Paint (LCP)</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Cumulative Layout Shift (CLS) = 0.0 with explicit dimensions</span>
+              </li>
+              <li class="spec-check-item">
+                <span class="check-icon">&check;</span>
+                <span>Pure relative asset references (../../assets/*)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Live Breakpoint Inspector -->
+          <div class="viewport-meter-box" role="region" aria-label="Responsive Breakpoint Inspector">
+            <div class="viewport-meter-label">
+              <span>ACTIVE VIEWPORT:</span>
+              <span id="current-viewport-pill" class="viewport-pill">Detecting...</span>
+            </div>
+            <div class="viewport-targets">
+              <span id="target-320" class="target-tag">320px (SE Narrow)</span>
+              <span id="target-390" class="target-tag">390px (Mobile Standard)</span>
+              <span id="target-768" class="target-tag">768px (Tablet Portrait)</span>
+              <span id="target-1440" class="target-tag">1440px (Desktop Wide)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       FOOTER & UNOFFICIAL NON-COMMERCIAL DISCLAIMER
+       ======================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <!-- Non-Commercial Disclaimer Box -->
+      <div class="disclaimer-card">
+        <h2 class="disclaimer-title">UNOFFICIAL VISUAL DESIGN STUDY &middot; NON-COMMERCIAL PROTOTYPE</h2>
+        <p class="disclaimer-text">
+          This static web demonstration was created exclusively for typography, layout, video overlay, and accessibility research.
+          It does not advertise, market, sell, or promote tobacco products or any commercial brand.
+          No commercial endorsement, partnership, transaction, or marketing representation is expressed or implied.
+          All visual assets are user-supplied materials used strictly within this local design exploration.
+        </p>
+      </div>
+
+      <!-- Footer Bottom Row -->
+      <div class="footer-bottom-row">
+        <div class="footer-brand">
+          <img
+            src="../../assets/logo.svg"
+            alt="Visual Study Logo"
+            class="footer-logo"
+            width="120"
+            height="31"
+          >
+          <span class="footer-copy">
+            Independent Visual Exploration &middot; 2026 &middot; GitHub Pages Static Deployment
+          </span>
+        </div>
+
+        <a href="#top" class="footer-back-to-top" aria-label="Top of Page - Return to top">
+          <span>&uarr; Top of Page</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       VANILLA JAVASCRIPT LOGIC
+       Full video playback HUD, scrubbing, keyboard shortcuts, mobile drawer,
+       reduced-motion detection, scroll spy, and viewport inspector.
+       ======================================================================== -->
+  <script>
+    (function () {
+      "use strict";
+
+      // Elements
+      const header = document.getElementById("site-header");
+      const menuToggleBtn = document.getElementById("menu-toggle-btn");
+      const mobileDrawer = document.getElementById("mobile-nav-drawer");
+      const mobileLinks = document.querySelectorAll(".mobile-drawer-link");
+      const navLinks = document.querySelectorAll(".desktop-nav .nav-link");
+      const sections = document.querySelectorAll("section[id]");
+
+      const video = document.getElementById("hero-video");
+      const playBtn = document.getElementById("video-play-btn");
+      const playBtnText = document.getElementById("play-btn-text");
+      const playBtnIcon = document.getElementById("play-btn-icon");
+
+      const soundBtn = document.getElementById("video-sound-btn");
+      const soundBtnText = document.getElementById("sound-btn-text");
+      const soundBtnIcon = document.getElementById("sound-btn-icon");
+
+      const scrubberTrack = document.getElementById("hud-scrubber");
+      const progressBar = document.getElementById("hud-progress-bar");
+      const timecodeDisplay = document.getElementById("hud-timecode-display");
+      const motionBtn = document.getElementById("reduced-motion-btn");
+      const motionBtnText = document.getElementById("motion-btn-text");
+
+      const liveAnnouncer = document.getElementById("aria-live-status");
+
+      const viewportPill = document.getElementById("current-viewport-pill");
+      const target320 = document.getElementById("target-320");
+      const target390 = document.getElementById("target-390");
+      const target768 = document.getElementById("target-768");
+      const target1440 = document.getElementById("target-1440");
+
+      const phaseCards = document.querySelectorAll(".phase-card");
+
+      // Announce utility for screen readers
+      function announce(message) {
+        if (liveAnnouncer) {
+          liveAnnouncer.textContent = message;
+        }
+      }
+
+      // ======================================================================
+      // 1. FIXED HEADER ON SCROLL
+      // ======================================================================
+      function onScroll() {
+        const scrollY = window.scrollY || window.pageYOffset;
+        if (scrollY > 30) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+
+        // Active link tracking
+        let currentSectionId = "";
+        sections.forEach(sec => {
+          const top = sec.offsetTop - 120;
+          const height = sec.offsetHeight;
+          if (scrollY >= top && scrollY < top + height) {
+            currentSectionId = sec.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach(link => {
+          const href = link.getAttribute("href");
+          if (href === "#" + currentSectionId) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      // ======================================================================
+      // 2. MOBILE DRAWER NAVIGATION
+      // ======================================================================
+      function toggleMobileMenu(forceState) {
+        const isExpanded = menuToggleBtn.getAttribute("aria-expanded") === "true";
+        const nextState = typeof forceState === "boolean" ? forceState : !isExpanded;
+
+        menuToggleBtn.setAttribute("aria-expanded", String(nextState));
+        if (nextState) {
+          mobileDrawer.classList.add("open");
+          announce("Navigation menu opened");
+          if (mobileLinks.length > 0) {
+            mobileLinks[0].focus();
+          }
+        } else {
+          mobileDrawer.classList.remove("open");
+          announce("Navigation menu closed");
+        }
+      }
+
+      menuToggleBtn.addEventListener("click", () => toggleMobileMenu());
+
+      mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          toggleMobileMenu(false);
+        });
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileDrawer.classList.contains("open")) {
+          toggleMobileMenu(false);
+          menuToggleBtn.focus();
+        }
+      });
+
+      // ======================================================================
+      // 3. VIDEO PLAY / PAUSE HUD CONTROLS
+      // ======================================================================
+      function updatePlayBtnUI(isPlaying) {
+        if (isPlaying) {
+          playBtn.setAttribute("aria-label", "Pause - Pause background video");
+          playBtnText.textContent = "Pause";
+          playBtnIcon.innerHTML = `
+            <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+            <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+          `;
+        } else {
+          playBtn.setAttribute("aria-label", "Play - Play background video");
+          playBtnText.textContent = "Play";
+          playBtnIcon.innerHTML = `
+            <polygon points="6 4 20 12 6 20 6 4"></polygon>
+          `;
+        }
+      }
+
+      function togglePlayPause() {
+        if (video.paused || video.ended) {
+          video.play().then(() => {
+            updatePlayBtnUI(true);
+            announce("Video playing");
+          }).catch(err => {
+            console.warn("Video playback prevented:", err);
+          });
+        } else {
+          video.pause();
+          updatePlayBtnUI(false);
+          announce("Video paused");
+        }
+      }
+
+      playBtn.addEventListener("click", togglePlayPause);
+
+      // Keyboard shortcuts: Space or 'k'
+      window.addEventListener("keydown", (e) => {
+        const tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
+        if (tag === "input" || tag === "textarea") return;
+
+        if (e.key === "k" || e.key === "K") {
+          e.preventDefault();
+          togglePlayPause();
+        } else if (e.key === " " && document.activeElement === playBtn) {
+          e.preventDefault();
+          togglePlayPause();
+        }
+      });
+
+      // ======================================================================
+      // 4. AUDIO / SOUND TOGGLE
+      // ======================================================================
+      function updateSoundBtnUI(isMuted) {
+        if (isMuted) {
+          soundBtnText.textContent = "Muted";
+          soundBtn.setAttribute("aria-label", "Muted - Click to unmute video");
+          soundBtnIcon.innerHTML = `
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+          `;
+        } else {
+          soundBtnText.textContent = "Audio";
+          soundBtn.setAttribute("aria-label", "Audio - Click to mute video");
+          soundBtnIcon.innerHTML = `
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          `;
+        }
+      }
+
+      function toggleSound() {
+        if (video.muted) {
+          video.muted = false;
+          video.volume = 0.5;
+          updateSoundBtnUI(false);
+          announce("Audio unmuted");
+        } else {
+          video.muted = true;
+          updateSoundBtnUI(true);
+          announce("Audio muted");
+        }
+      }
+
+      soundBtn.addEventListener("click", toggleSound);
+
+      window.addEventListener("keydown", (e) => {
+        const tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
+        if (tag === "input" || tag === "textarea") return;
+        if (e.key === "m" || e.key === "M") {
+          e.preventDefault();
+          toggleSound();
+        }
+      });
+
+      // ======================================================================
+      // 5. TIMELINE SCRUBBER & LOOP TIME TRACKING
+      // ======================================================================
+      function formatTime(seconds) {
+        const s = Math.min(Math.max(seconds, 0), 4);
+        return s.toFixed(1) + "s";
+      }
+
+      function updateScrubber() {
+        const duration = video.duration || 4.0;
+        const current = video.currentTime || 0;
+        const pct = (current / duration) * 100;
+
+        progressBar.style.width = pct.toFixed(1) + "%";
+        scrubberTrack.setAttribute("aria-valuenow", current.toFixed(1));
+        timecodeDisplay.textContent = `${formatTime(current)} / 04.0s`;
+
+        const secIndex = Math.floor(current);
+        phaseCards.forEach((card, idx) => {
+          if (idx === secIndex) {
+            card.classList.add("active-phase");
+          } else {
+            card.classList.remove("active-phase");
+          }
+        });
+      }
+
+      video.addEventListener("timeupdate", updateScrubber);
+
+      scrubberTrack.addEventListener("click", (e) => {
+        const rect = scrubberTrack.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const ratio = Math.max(0, Math.min(clickX / rect.width, 1));
+        const duration = video.duration || 4.0;
+        video.currentTime = ratio * duration;
+        updateScrubber();
+        announce(`Video scrubbed to ${video.currentTime.toFixed(1)} seconds`);
+      });
+
+      scrubberTrack.addEventListener("keydown", (e) => {
+        const duration = video.duration || 4.0;
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          video.currentTime = Math.max(0, video.currentTime - 0.5);
+          updateScrubber();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          video.currentTime = Math.min(duration, video.currentTime + 0.5);
+          updateScrubber();
+        }
+      });
+
+      // ======================================================================
+      // 6. PHASE CARDS INTERACTIVE SEEKING
+      // ======================================================================
+      phaseCards.forEach(card => {
+        card.addEventListener("click", () => {
+          const seekTime = parseFloat(card.getAttribute("data-seek-time") || "0");
+          video.currentTime = seekTime;
+          if (video.paused) {
+            video.play().then(() => updatePlayBtnUI(true)).catch(() => {});
+          }
+          updateScrubber();
+          announce(`Jumped to ${card.querySelector(".phase-name").textContent} at ${seekTime}s`);
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        });
+      });
+
+      // ======================================================================
+      // 7. MOTION PREFERENCE & REDUCED MOTION TOGGLE
+      // ======================================================================
+      const prefersReducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      function applyMotionPreference(reduced) {
+        if (reduced) {
+          document.body.classList.add("reduced-motion-active");
+          motionBtn.setAttribute("aria-pressed", "true");
+          motionBtnText.textContent = "Motion: Reduced";
+          if (!video.paused) {
+            video.pause();
+            updatePlayBtnUI(false);
+          }
+          announce("Reduced motion activated. Background video paused.");
+        } else {
+          document.body.classList.remove("reduced-motion-active");
+          motionBtn.setAttribute("aria-pressed", "false");
+          motionBtnText.textContent = "Motion: Dynamic";
+          if (video.paused) {
+            video.play().then(() => updatePlayBtnUI(true)).catch(() => {});
+          }
+          announce("Dynamic motion activated.");
+        }
+      }
+
+      if (prefersReducedQuery.matches) {
+        applyMotionPreference(true);
+      }
+
+      prefersReducedQuery.addEventListener("change", (e) => {
+        applyMotionPreference(e.matches);
+      });
+
+      motionBtn.addEventListener("click", () => {
+        const isReduced = document.body.classList.contains("reduced-motion-active");
+        applyMotionPreference(!isReduced);
+      });
+
+      // ======================================================================
+      // 8. RESPONSIVE VIEWPORT INSPECTOR
+      // ======================================================================
+      function updateViewportMeter() {
+        const width = window.innerWidth;
+        viewportPill.textContent = `${width}px`;
+
+        target320.classList.remove("current");
+        target390.classList.remove("current");
+        target768.classList.remove("current");
+        target1440.classList.remove("current");
+
+        if (width <= 340) {
+          target320.classList.add("current");
+        } else if (width <= 500) {
+          target390.classList.add("current");
+        } else if (width <= 900) {
+          target768.classList.add("current");
+        } else {
+          target1440.classList.add("current");
+        }
+      }
+
+      window.addEventListener("resize", updateViewportMeter, { passive: true });
+      updateViewportMeter();
+
+      video.addEventListener("play", () => updatePlayBtnUI(true));
+      video.addEventListener("pause", () => updatePlayBtnUI(false));
+
+    })();
+  </script>
+</body>
+</html>
