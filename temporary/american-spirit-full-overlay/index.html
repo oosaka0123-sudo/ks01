@@ -2,77 +2,731 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071b34">
-<meta name="robots" content="noindex,nofollow">
-<meta name="description" content="パッケージ写真をもとにしたタイポグラフィとインタラクションの非公式デザインデモ。販売・広告目的ではありません。">
-<title>FULL OVERLAY — Motion Design Study</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>鏡のような海で、波を待つ。｜非公式・非商用のビジュアルデザイン研究</title>
+<meta name="description" content="四秒の海の映像を一枚の紙面として組む、非公式・非商用のウェブデザイン習作。">
+<meta name="theme-color" content="#0B1F45">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/poster.jpg" as="image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
 <style>
-:root{--bg:#082c28;--panel:#063e36;--accent:#f45b56;--light:#f3ead7;--mint:#9fd1bf;--line:rgba(239,239,216,.19);--ink:#102d29;--ease:cubic-bezier(.2,.7,.15,1)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--light);font-family:Inter,"Helvetica Neue",Arial,"Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit}button,a{outline-offset:5px}::selection{background:var(--accent);color:#fff}
-.grain{position:fixed;inset:0;pointer-events:none;z-index:25;opacity:.11;background-image:url('data:image/svg+xml,%3Csvg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity=".28"/%3E%3C/svg%3E')}
-.nav{position:fixed;z-index:50;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:28px clamp(22px,5vw,76px);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.17em;font-size:12px}.brand-icon{width:30px;height:30px;border:1px solid var(--mint);border-radius:50%;display:grid;place-items:center;color:var(--mint);font-size:18px;font-weight:400}.nav-right{display:flex;gap:34px;align-items:center;font-size:11px;font-weight:750;letter-spacing:.16em}.nav a:hover{color:var(--mint)}.demo-label{border:1px solid var(--line);padding:10px 13px;letter-spacing:.1em;color:var(--mint)}
-.hero{position:relative;min-height:800px;min-height:100svh;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}.hero-copy{position:relative;z-index:3;padding:170px 0 110px clamp(24px,9vw,140px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}.eyebrow{display:flex;align-items:center;gap:15px;color:var(--mint);letter-spacing:.28em;font-size:11px;font-weight:700}.eyebrow:before{content:'';width:34px;height:1px;background:var(--mint)}.title{font-family:Impact,"Arial Narrow",sans-serif;text-transform:uppercase;font-stretch:condensed;font-weight:900;letter-spacing:-.035em;line-height:.85;font-size:clamp(98px,13vw,238px);margin:38px 0 30px;position:relative;white-space:nowrap}.title span{display:block}.title .second{color:transparent;-webkit-text-stroke:1.5px var(--light);padding-left:.23em}.title .red{color:var(--accent);-webkit-text-stroke:0}.short-line{height:1px;background:var(--line);width:min(430px,95%);margin:8px 0 23px}.subtitle{font-size:clamp(16px,1.55vw,21px);letter-spacing:.12em;font-weight:600;line-height:1.9;max-width:540px}.caption{font-size:12px;line-height:2;color:var(--mint);max-width:420px;margin:8px 0 30px}.scroll-cta{display:inline-flex;align-items:center;gap:20px;font-size:11px;font-weight:800;letter-spacing:.2em;border:0;background:none;color:var(--light);padding:15px 0;cursor:pointer}.scroll-cta .circle{width:54px;height:54px;display:grid;place-items:center;border:1px solid var(--mint);border-radius:50%;transition:background .25s,transform .25s}.scroll-cta:hover .circle{background:var(--panel);transform:translateY(4px)}
-.hero-visual{position:relative;min-height:700px;display:grid;place-items:center;isolation:isolate;background:radial-gradient(ellipse at 58% 48%,#206d5c 0%,#075347 37%,#0a3932 68%,#082c28 100%)}.visual-ring{position:absolute;width:min(77%,610px);aspect-ratio:1;border:1px solid rgba(250,232,203,.23);border-radius:50%;box-shadow:0 0 0 60px rgba(255,255,255,.012),0 0 0 120px rgba(255,255,255,.01)}.red-disc{position:absolute;width:min(65%,490px);aspect-ratio:1;top:19%;right:-10%;background:var(--accent);border-radius:50%;filter:drop-shadow(0 15px 55px #092b2a65);opacity:.95}.package-holder{position:relative;z-index:4;width:clamp(210px,30vw,410px);transform:rotate(-8deg) translate(-1vw,2vw);filter:drop-shadow(28px 42px 27px rgba(0,0,0,.42));transition:transform .65s var(--ease)}.package-holder:hover{transform:rotate(-3deg) translate(-1vw,-.5vw)}.package{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:7px;box-shadow:inset 0 0 0 1px #ffffff33}.package-tag{position:absolute;bottom:9%;right:9%;z-index:5;font-size:10px;letter-spacing:.23em;writing-mode:vertical-rl;color:#dcf2e5}.hero-counter{position:absolute;bottom:35px;left:9%;font-size:11px;letter-spacing:.2em;color:var(--mint)}
-.marquee{padding:19px 0;background:var(--accent);color:var(--bg);overflow:hidden;display:flex;white-space:nowrap;font-family:Impact,"Arial Narrow",sans-serif;font-size:clamp(24px,3vw,38px);letter-spacing:.13em}.marquee-track{display:flex;gap:35px;min-width:max-content;animation:marquee 28s linear infinite}.marquee span:after{content:'✳';margin-left:35px}@keyframes marquee{to{transform:translateX(-50%)}}
-.section{padding:clamp(85px,11vw,175px) clamp(22px,8vw,120px)}.section-kicker{font-size:11px;font-weight:800;letter-spacing:.2em;color:var(--mint)}.section-title{font-size:clamp(43px,7vw,112px);font-weight:800;letter-spacing:-.07em;line-height:1.08;margin:24px 0 36px}.section-title em{font-style:normal;color:var(--accent)}.story{display:grid;grid-template-columns:1.1fr .9fr;gap:min(8vw,140px);align-items:center}.story-copy{font-size:clamp(15px,1.5vw,19px);line-height:2.2;color:#c9ded4;max-width:650px}.swatches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:530px;margin-top:40px}.swatch{height:115px;display:flex;flex-direction:column;justify-content:space-between;padding:12px;font-size:11px;letter-spacing:.13em;color:#fff}.swatch:nth-child(1){background:#087965}.swatch:nth-child(2){background:#f45b56;color:#132b27}.swatch:nth-child(3){background:#112b28}.large-index{font-family:Impact,"Arial Narrow",sans-serif;font-size:clamp(180px,29vw,480px);line-height:1;color:transparent;-webkit-text-stroke:1px #8ab9a677;transform:rotate(8deg);text-align:center}
-.details{background:var(--light);color:var(--ink)}.details .section-kicker{color:#297565}.details-wrap{display:grid;grid-template-columns:1fr 1fr;gap:9vw}.details .section-title{font-size:clamp(45px,6vw,95px)}.detail-list{border-top:1px solid #0f463a40}.detail-row{border-bottom:1px solid #0f463a40;display:grid;grid-template-columns:120px 1fr;gap:18px;padding:23px 0;font-size:14px;line-height:1.7}.detail-row span{font-size:11px;letter-spacing:.12em;font-weight:800;color:#417063}.legal{background:#061e1b;padding:55px clamp(22px,8vw,120px);display:grid;grid-template-columns:1fr auto;gap:45px;align-items:end}.legal h2{font-size:13px;letter-spacing:.15em;color:var(--mint)}.legal p{font-size:12px;line-height:2;max-width:780px;color:#d1ddd8}.legal strong{color:#fff}.footer{border-top:1px solid var(--line);background:#061e1b;padding:28px clamp(22px,8vw,120px);display:flex;justify-content:space-between;gap:25px;align-items:center;font-size:10px;color:#b1cbbf;letter-spacing:.12em}.back-top{background:none;border:0;color:var(--mint);cursor:pointer;letter-spacing:.16em}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.reveal.is-visible{opacity:1;transform:none}
-@media(max-width:950px){.hero{grid-template-columns:1fr}.hero-copy{padding:140px 7vw 44px;min-height:590px}.title{font-size:clamp(94px,17vw,175px)}.hero-visual{min-height:650px}.package-holder{width:clamp(235px,43vw,385px)}.nav-right a:not(.demo-label){display:none}.story,.details-wrap{grid-template-columns:1fr}.large-index{display:none}.story-copy{max-width:780px}}
-@media(max-width:540px){.nav{padding:19px 20px}.brand{font-size:10px;gap:8px}.brand-icon{width:27px;height:27px}.demo-label{font-size:9px;padding:9px}.hero-copy{min-height:490px;padding:115px 22px 35px}.eyebrow{font-size:9px}.title{font-size:clamp(88px,19vw,124px);margin:30px 0 20px}.title .second{padding-left:.11em}.subtitle{font-size:16px}.caption{font-size:11px}.scroll-cta{font-size:10px}.scroll-cta .circle{width:44px;height:44px}.hero-visual{min-height:535px}.package-holder{width:250px}.red-disc{width:75%;top:17%;right:-18%}.visual-ring{width:76%}.hero-counter{bottom:22px}.section{padding:85px 22px}.section-title{font-size:clamp(48px,12vw,78px)}.swatch{height:90px;font-size:9px;padding:9px}.detail-row{grid-template-columns:88px 1fr;font-size:13px}.legal{padding:50px 22px;grid-template-columns:1fr}.footer{padding:25px 22px;flex-wrap:wrap}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marquee-track{animation:none}.reveal{opacity:1;transform:none;transition:none}.package-holder,.package-holder:hover{transition:none;transform:rotate(-5deg)}}
+  :root {
+    --sky: #0F2C6E;      /* 空の群青 */
+    --gold: #E9C37A;     /* 雲の金 */
+    --lagoon: #2FA9A0;   /* 波の翠 */
+    --lagoon-deep: #1D6F6A;
+    --salt: #EEF3F0;     /* 潮の白 */
+    --ink: #0B1F45;      /* 深い紺 */
+    --white: #FFFFFF;
+    --serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+    --sans: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "YuGothic", "Meiryo", sans-serif;
+    --bar-h: 64px;
+    --gutter: clamp(20px, 5vw, 72px);
+    --horizon: 52%;
+    --focus: var(--gold);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    margin: 0;
+    background: var(--salt);
+    color: var(--ink);
+    font: 400 1rem/1.85 var(--sans);
+    font-feature-settings: "palt" 0;
+    overflow-wrap: anywhere;
+    line-break: strict;
+  }
+  img, svg, video { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+  .on-light { --focus: var(--ink); }
+  .on-dark { --focus: var(--gold); }
 
-/* Full-screen video overlay module, standalone and removable */
-.site-logo{display:block;width:180px;height:auto;max-width:40vw;filter:drop-shadow(0 1px 6px #0004)}
-.nav{position:fixed;z-index:50;background:linear-gradient(180deg,rgba(3,19,30,.87),rgba(3,19,30,.65));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #fff3}.nav .brand{line-height:0}
-.video-overlay-hero{height:100svh;min-height:540px;position:relative;overflow:hidden;isolation:isolate;background:#071b34;color:#fff}
-.video-blur{position:absolute;inset:-45px;z-index:-3;background:url('assets/poster.jpg') center/cover no-repeat;filter:blur(32px) brightness(.4);transform:scale(1.1)}
-.video-backdrop{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;z-index:-2}
-.video-tint{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,14,30,.72) 0,rgba(1,19,36,.18) 68%),linear-gradient(0deg,rgba(0,8,19,.75),transparent 30%,transparent 74%,rgba(0,10,20,.38));pointer-events:none}
-.video-hero-content{position:absolute;left:clamp(22px,7vw,100px);bottom:clamp(95px,15vh,180px);max-width:700px;z-index:2;text-shadow:0 2px 18px #0005}
-.video-overline{font-size:11px;letter-spacing:.26em;font-weight:700;color:#cbe3f8}
-.video-title{font:900 clamp(62px,9vw,136px)/.89 Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:-.027em;margin:25px 0 23px}
-.video-title em{font-style:normal;color:transparent;-webkit-text-stroke:1.3px #fff}
-.video-hero-content p{font-size:clamp(13px,1.5vw,17px);line-height:1.8;letter-spacing:.05em}
-.video-next{display:inline-flex;gap:30px;align-items:center;margin-top:26px;font-size:11px;font-weight:800;letter-spacing:.15em;border-bottom:1px solid #fffa;padding:0 0 13px}
-.video-next span{font-size:19px}
-.video-controls{position:absolute;right:clamp(22px,5vw,75px);bottom:35px;display:flex;gap:10px;z-index:5}
-.video-controls button{color:#fff;background:#102b42aa;border:1px solid #fff8;border-radius:50px;min-height:44px;padding:0 18px;cursor:pointer;font-size:10px;font-weight:bold;letter-spacing:.1em;backdrop-filter:blur(10px)}
-.video-controls button:focus-visible,.video-next:focus-visible{outline:3px solid #fff;outline-offset:4px}
-.video-side-note{position:absolute;left:clamp(22px,7vw,100px);bottom:45px;font-size:10px;letter-spacing:.18em;color:#d9e6f5;z-index:2}
-.original-demo-label{background:#f45b56;color:#082c28;font:800 11px Arial,sans-serif;letter-spacing:.18em;padding:18px 8vw}
-@media(min-width:1100px){.video-backdrop{object-fit:cover;object-position:center 42%}.video-tint{background:linear-gradient(90deg,rgba(0,14,30,.82),rgba(1,19,36,.12) 80%),linear-gradient(0deg,rgba(0,8,19,.7),transparent 40%)}}
-@media(max-width:640px){.nav-right a{display:none}.site-logo{width:145px}.video-backdrop{object-fit:cover;object-position:center center}.video-hero-content{bottom:145px;right:20px}.video-title{font-size:clamp(56px,12vw,82px)}.video-title em{-webkit-text-stroke:1px #fff}.video-overline{font-size:9px}.video-hero-content p{font-size:13px}.video-controls{bottom:26px;right:20px}.video-side-note{left:20px;bottom:90px;font-size:8px}}
-@media(prefers-reduced-motion:reduce){.video-overlay-hero video{display:none}.video-blur{filter:none;inset:0;transform:none}.video-tint{background:#071b3499}}
-</style>
+  .skip {
+    position: fixed; left: 12px; top: 12px; z-index: 100;
+    padding: 10px 16px; background: var(--white); color: var(--ink);
+    font-weight: 500; text-decoration: none;
+    transform: translateY(-160%);
+  }
+  .skip:focus { transform: none; --focus: var(--ink); }
+
+  /* ───────── Fixed header ───────── */
+  .bar {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    height: calc(var(--bar-h) + env(safe-area-inset-top));
+    padding: 0 var(--gutter);
+    padding-top: env(safe-area-inset-top);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background: rgba(11, 31, 69, .36);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid rgba(255, 255, 255, .14);
+    color: var(--white);
+    transition: background-color .4s ease;
+  }
+  .bar.is-solid { background: rgba(11, 31, 69, .86); }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .bar { background: rgba(11, 31, 69, .72); }
+  }
+  .brand { display: inline-flex; align-items: center; min-height: 44px; flex: none; }
+  .brand img { height: 34px; width: auto; }
+
+  .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: clamp(4px, 1.6vw, 24px); }
+  .nav a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px;
+    font-size: .9375rem; letter-spacing: .08em; text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) left calc(100% - 10px) / 0 1px no-repeat;
+    transition: background-size .3s ease;
+  }
+  .nav a:hover, .nav a[aria-current] { background-size: calc(100% - 16px) 1px; background-position: 8px calc(100% - 10px); }
+  .menu-btn { display: none; }
+
+  @media (max-width: 720px) {
+    :root { --bar-h: 56px; }
+    .brand img { height: 30px; }
+    .nav a { font-size: .875rem; padding: 0 6px; }
+    .js .menu-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      min-height: 44px; min-width: 44px; padding: 0 4px 0 12px;
+      background: none; border: 0; color: inherit; font: 500 .875rem/1 var(--sans); letter-spacing: .08em;
+      cursor: pointer;
+    }
+    .menu-btn__icon { position: relative; width: 22px; height: 12px; }
+    .menu-btn__icon::before, .menu-btn__icon::after {
+      content: ""; position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor;
+      transition: transform .25s ease, top .25s ease;
+    }
+    .menu-btn__icon::before { top: 0; }
+    .menu-btn__icon::after { top: 10px; }
+    .menu-btn[aria-expanded="true"] .menu-btn__icon::before { top: 5px; transform: rotate(20deg); }
+    .menu-btn[aria-expanded="true"] .menu-btn__icon::after { top: 5px; transform: rotate(-20deg); }
+
+    .js .nav {
+      position: fixed; left: 0; right: 0; top: calc(var(--bar-h) + env(safe-area-inset-top));
+      background: rgba(11, 31, 69, .94);
+      border-bottom: 1px solid rgba(255, 255, 255, .14);
+      padding: 8px var(--gutter) 20px;
+      display: none;
+    }
+    .js .nav.is-open { display: block; }
+    .js .nav ul { flex-direction: column; gap: 0; }
+    .js .nav a {
+      display: flex; min-height: 52px; padding: 0; font-family: var(--serif); font-size: 1.25rem; font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, .12); background: none;
+    }
+    .js .nav a[aria-current] { color: var(--gold); }
+  }
+
+  /* ───────── Hero ───────── */
+  .hero {
+    position: relative;
+    height: 100vh; height: 100svh;
+    min-height: 540px;
+    overflow: hidden;
+    background: var(--sky) url("assets/poster.jpg") 50% 60% / cover no-repeat;
+    color: var(--white);
+    isolation: isolate;
+  }
+  .hero__video {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 60%;
+    z-index: -2;
+  }
+  .hero__scrim {
+    position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(60% 55% at 78% 34%, rgba(11, 31, 69, .52), transparent 70%),
+      linear-gradient(to top, rgba(11, 31, 69, .78) 0%, rgba(11, 31, 69, 0) 34%),
+      linear-gradient(to bottom, rgba(11, 31, 69, .4) 0%, rgba(11, 31, 69, 0) 18%);
+  }
+
+  /* Headline set on the video's horizon (desktop / tablet) */
+  .mark, .mark-mirror {
+    position: absolute; left: 46%; right: var(--gutter);
+    margin: 0;
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(2.25rem, 5.2vw, 5.5rem);
+    line-height: 1.12; letter-spacing: .04em;
+    font-feature-settings: "palt" 1;
+  }
+  .mark { bottom: calc(100% - var(--horizon) + .06em); text-shadow: 0 2px 28px rgba(11, 31, 69, .55); }
+  .mark-mirror {
+    top: calc(var(--horizon) + .06em);
+    transform: scaleY(-1); transform-origin: 50% 50%;
+    color: rgba(255, 255, 255, .5);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .55) 35%, transparent 75%);
+    mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, .55) 35%, transparent 75%);
+    pointer-events: none; user-select: none;
+  }
+  .mark-mirror .mark__inner { filter: blur(.6px); }
+  @media (max-width: 960px) { .mark, .mark-mirror { left: 40%; } }
+  .mark__line { display: block; overflow: hidden; padding-inline-end: .1em; }
+  .mark__inner { display: block; white-space: nowrap; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mark__inner { animation: rise 1.4s cubic-bezier(.2, .7, .1, 1) both; }
+    .mark__line:nth-child(2) .mark__inner { animation-delay: .18s; }
+    .mark-mirror .mark__wave { animation: swell 4s ease-in-out 1.6s infinite; transform-origin: 50% 100%; }
+  }
+  .mark__wave { display: block; }
+  @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+  @keyframes swell {
+    0%, 100% { transform: none; }
+    50% { transform: scaleY(.9) skewX(-3deg) translateX(.06em); }
+  }
+
+  .hero__meta {
+    position: absolute; left: var(--gutter); right: var(--gutter);
+    bottom: calc(96px + env(safe-area-inset-bottom));
+    max-width: 30em;
+  }
+  .hero__tag {
+    margin: 0 0 .5em; display: inline-block;
+    font-size: .8125rem; letter-spacing: .1em;
+    padding: 2px 10px; border: 1px solid rgba(255, 255, 255, .7);
+    background: rgba(11, 31, 69, .45);
+  }
+  .hero__lede { margin: 0; font-size: .9375rem; line-height: 1.8; text-shadow: 0 1px 12px rgba(11, 31, 69, .8); }
+
+  .controls {
+    position: absolute; left: var(--gutter); right: var(--gutter);
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    display: flex; align-items: center; gap: 12px;
+  }
+  .ctrl {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-width: 44px; height: 44px; padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, .7); border-radius: 22px;
+    background: rgba(11, 31, 69, .5); color: var(--white);
+    font: 500 .8125rem/1 var(--sans); letter-spacing: .06em;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  }
+  .ctrl:hover { background: rgba(11, 31, 69, .75); }
+  .ctrl[aria-disabled="true"] { opacity: .62; cursor: not-allowed; }
+  .ctrl svg { width: 14px; height: 14px; flex: none; }
+  .ctrl .when-on, .ctrl.is-on .when-off { display: none; }
+  .ctrl.is-on .when-on { display: inline; }
+  .loop { flex: 1; display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .loop__track { position: relative; flex: 1; height: 1px; background: rgba(255, 255, 255, .45); max-width: 240px; }
+  .loop__fill { position: absolute; inset: -1px 0; background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; }
+  .loop__time { font-size: .75rem; letter-spacing: .06em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hero__next {
+    margin-left: auto; display: inline-flex; align-items: center; min-height: 44px;
+    font-size: .8125rem; letter-spacing: .12em; text-decoration: none;
+    writing-mode: horizontal-tb;
+  }
+  .hero__next::after { content: ""; width: 1px; height: 28px; margin-left: 12px; background: currentColor; }
+
+  /* Smartphone idea: portrait video ≈ portrait screen. Headline goes vertical into the sky. */
+  @media (max-width: 600px) {
+    .hero { min-height: 520px; }
+    .hero__video, .hero { background-position: 50% 50%; object-position: 50% 50%; }
+    .hero__scrim {
+      background:
+        linear-gradient(to left, rgba(11, 31, 69, .5) 0%, rgba(11, 31, 69, 0) 45%),
+        linear-gradient(to top, rgba(11, 31, 69, .85) 0%, rgba(11, 31, 69, 0) 40%),
+        linear-gradient(to bottom, rgba(11, 31, 69, .45) 0%, rgba(11, 31, 69, 0) 20%);
+    }
+    .mark {
+      left: auto; right: max(14px, env(safe-area-inset-right)); bottom: auto;
+      top: calc(var(--bar-h) + 24px);
+      writing-mode: vertical-rl;
+      font-size: clamp(1.75rem, 9.6vw, 2.5rem);
+      line-height: 1.3; letter-spacing: .12em;
+    }
+    .mark__line { padding-inline-end: 0; }
+    .mark-mirror { display: none; }
+    .hero__meta { bottom: calc(84px + env(safe-area-inset-bottom)); right: 30%; }
+    .hero__tag { font-size: .75rem; letter-spacing: .04em; }
+    .hero__lede { font-size: .875rem; }
+    .controls { gap: 8px; bottom: calc(18px + env(safe-area-inset-bottom)); }
+    .ctrl { padding: 0 12px; }
+    .ctrl__label { display: none; }
+    .hero__next { display: none; }
+  }
+  @media (max-width: 360px) {
+    .hero__meta { right: 26%; }
+    .loop__time { display: none; }
+  }
+  @media (max-width: 600px) and (max-height: 600px) {
+    .hero__lede { display: none; }
+  }
+
+  /* ───────── Lower sections ───────── */
+  main section:not(.hero) { scroll-margin-top: var(--bar-h); }
+  .chapter { position: relative; padding: clamp(72px, 11vw, 152px) var(--gutter); }
+  .chapter__rule {
+    position: absolute; top: 0; left: var(--gutter); right: var(--gutter);
+    height: 1px; background: currentColor; opacity: .5;
+    transform-origin: 0 50%;
+  }
+  .js .chapter__rule { transform: scaleX(0); }
+  .js .chapter.is-in .chapter__rule { transform: none; transition: transform 1.2s cubic-bezier(.2, .7, .1, 1); }
+  @media (prefers-reduced-motion: reduce) {
+    .js .chapter__rule { transform: none; transition: none; }
+  }
+
+  .chapter__grid {
+    display: grid; gap: clamp(28px, 4vw, 64px);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    max-width: 1280px; margin: 0 auto;
+  }
+  @media (max-width: 860px) { .chapter__grid { grid-template-columns: minmax(0, 1fr); } }
+  .chapter h2 {
+    margin: 0; font-family: var(--serif); font-weight: 700;
+    font-size: clamp(1.75rem, 3.6vw, 3rem); line-height: 1.35; letter-spacing: .04em;
+    font-feature-settings: "palt" 1;
+  }
+  .chapter__intro { margin: 1.25em 0 0; max-width: 32em; }
+  .chapter p { max-width: 36em; }
+
+  /* Horizon chapter: two wireframes */
+  .frames { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; margin: 0; }
+  @media (max-width: 480px) { .frames { grid-template-columns: minmax(0, 1fr); } }
+  .frame { margin: 0; }
+  .frame svg { width: 100%; height: auto; }
+  .frame--phone svg { max-width: 220px; }
+  .frame figcaption { margin-top: 14px; font-size: .875rem; line-height: 1.8; }
+  .frame figcaption strong { display: block; font-family: var(--serif); font-size: 1.0625rem; font-weight: 700; margin-bottom: 2px; }
+
+  /* Palette chapter: strata ordered sky → seabed */
+  .strata { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(11, 31, 69, .25); }
+  .stratum {
+    display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 20px; align-items: center;
+    padding: 16px 0; border-bottom: 1px solid rgba(11, 31, 69, .25);
+  }
+  .stratum__chip { height: 56px; border: 1px solid rgba(11, 31, 69, .2); }
+  .stratum__name { font-family: var(--serif); font-weight: 700; font-size: 1.125rem; }
+  .stratum__hex { margin-left: .75em; font-size: .875rem; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+  .stratum__role { margin: 2px 0 0; font-size: .875rem; line-height: 1.75; }
+  @media (max-width: 400px) { .stratum { grid-template-columns: 56px minmax(0, 1fr); gap: 14px; } .stratum__chip { height: 72px; } }
+
+  /* Motion chapter (dark) */
+  .chapter--deep { background: var(--sky); color: var(--white); }
+  .chapter--deep a { color: var(--gold); }
+  .clock { margin: 0 0 40px; }
+  .clock__label { font-size: .875rem; letter-spacing: .06em; margin: 0; }
+  .clock__read {
+    margin: 4px 0 12px; font-family: var(--serif); font-weight: 500;
+    font-size: clamp(4.5rem, 14vw, 10rem); line-height: 1; letter-spacing: -.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .clock__read small { font-size: .22em; letter-spacing: .08em; margin-left: .3em; }
+  .clock__scale { position: relative; height: 28px; max-width: 560px; }
+  .clock__scale::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(255, 255, 255, .5); }
+  .clock__fill { position: absolute; left: 0; right: 0; top: -1px; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; }
+  .clock__ticks { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+  .clock__ticks li { position: absolute; top: 0; padding-top: 8px; font-size: .75rem; transform: translateX(-50%); }
+  .clock__ticks li::before { content: ""; position: absolute; top: 0; left: 50%; width: 1px; height: 6px; background: rgba(255, 255, 255, .7); }
+  .clock__ticks li:first-child { transform: none; }
+  .clock__ticks li:first-child::before { left: 0; }
+  .clock__ticks li:last-child { transform: translateX(-100%); }
+  .clock__ticks li:last-child::before { left: auto; right: 0; }
+  .rules { margin: 0; display: grid; gap: 0; border-top: 1px solid rgba(255, 255, 255, .3); }
+  .rules div { display: grid; grid-template-columns: minmax(0, 11em) minmax(0, 1fr); gap: 8px 24px; padding: 18px 0; border-bottom: 1px solid rgba(255, 255, 255, .3); }
+  .rules dt { font-family: var(--serif); font-weight: 700; font-size: 1.0625rem; }
+  .rules dd { margin: 0; font-size: .9375rem; }
+  @media (max-width: 560px) { .rules div { grid-template-columns: minmax(0, 1fr); } }
+
+  /* Notes */
+  .notes { list-style: none; margin: 0; padding: 0; }
+  .notes li { padding: 16px 0 16px 1.4em; position: relative; border-bottom: 1px solid rgba(11, 31, 69, .2); }
+  .notes li::before { content: ""; position: absolute; left: 0; top: 1.65em; width: .7em; height: 1px; background: currentColor; }
+  .notes li:first-child { font-weight: 500; }
+
+  .foot {
+    background: var(--ink); color: var(--white);
+    padding: 40px var(--gutter) calc(40px + env(safe-area-inset-bottom));
+    display: flex; flex-wrap: wrap; gap: 12px 32px; align-items: center; justify-content: space-between;
+    font-size: .8125rem; letter-spacing: .04em;
+  }
+  .foot img { height: 28px; width: auto; }
+  .foot p { margin: 0; }
+  .foot__powered { opacity: .85; }
+
+  .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+/* Selected from Gemini's asset-study approach, with accurate source labeling. */
+.reference-study{padding:clamp(70px,8vw,120px) clamp(24px,8vw,120px);background:#10263c;color:#eef3f0;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);align-items:center;gap:clamp(25px,5vw,70px)}
+.reference-study h2{font-size:clamp(29px,4vw,58px);line-height:1.3;margin:16px 0 20px}
+.reference-study p{max-width:550px;font-size:14px;line-height:2;color:#cedbd9}
+.reference-study figure{margin:0;justify-self:center;max-width:350px}
+.reference-study img{display:block;width:100%;height:auto;max-height:420px;object-fit:contain;border:1px solid #ffffff3d;background:#071b23;border-radius:3px}
+.reference-study figcaption{font-size:11px;color:#bed0d0;margin-top:12px;line-height:1.7}
+@media(max-width:720px){.reference-study{grid-template-columns:1fr}.reference-study figure{max-width:240px;justify-self:start}}.share-button{font:inherit;font-size:11px;letter-spacing:.1em;color:inherit;border:1px solid currentColor;border-radius:2px;background:transparent;padding:12px 16px;cursor:pointer;min-height:44px}.share-button:hover{background:#ffffff20}.share-button:focus-visible{outline:3px solid #e9c37a;outline-offset:3px}/* Integration QA: the supplied clip contains legible LINE-community text in the center.
+   Keep that text visible on every aspect ratio. */
+.hero{background-position:center;background-size:cover}
+.hero__video{object-fit:contain;object-position:center;background:rgba(3,15,27,.38)}
+.hero__scrim{background:linear-gradient(180deg,rgba(4,18,35,.72) 0%,transparent 19%,transparent 71%,rgba(4,18,35,.76) 100%)}
+.mark{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.mark-mirror{display:none!important}
+.hero__meta{max-width:26em}
+@media(max-width:600px){.hero__meta{bottom:calc(93px + env(safe-area-inset-bottom));max-width:58%}.hero__lede{font-size:.8rem}}</style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
-<header class="nav"><a class="brand" href="#top" aria-label="デモの先頭へ"><img src="assets/logo.svg" class="site-logo" width="180" height="46" alt="VISUAL STUDY"></a><nav class="nav-right" aria-label="ページ内ナビゲーション"><a href="#concept">CONCEPT</a><a href="#details">DETAILS</a><span class="demo-label">DESIGN DEMO / 01</span></nav></header>
-<main id="top">
-<section class="video-overlay-hero" aria-label="フルスクリーン動画デモ">
- <div class="video-blur" aria-hidden="true"></div>
- <video id="heroVideo" class="video-backdrop" autoplay muted loop playsinline preload="metadata" poster="assets/poster.jpg" aria-label="星空と満月の夜の海岸に立つ女性の短い映像">
- <source src="assets/hero.mp4" type="video/mp4">動画を再生できない環境です。</video>
- <div class="video-tint" aria-hidden="true"></div>
- <div class="video-hero-content"><span class="video-overline">CINEMATIC WEB EXPERIENCE · 01</span><h1 class="video-title">THE NIGHT<br><em>HAS A STORY.</em></h1><p>映像を、画面全体の世界観へ。<br>Full-screen motion / minimal interface.</p><a class="video-next" href="#original-demo">EXPLORE THE DESIGN <span aria-hidden="true">↓</span></a></div>
- <div class="video-controls"><button type="button" id="videoPlay" aria-pressed="true" aria-label="動画を一時停止">Ⅱ PAUSE</button><button type="button" id="videoSound" aria-pressed="false" aria-label="音声を有効にする">♪ SOUND OFF</button></div>
- <span class="video-side-note">4 SEC LOOP — DESIGN PREVIEW</span>
-</section>
-<div id="original-demo" class="original-demo-label">02 / PACKAGE DESIGN STUDY</div>
-<section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><p class="eyebrow reveal">EDITORIAL DESIGN EXPERIMENT</p><h2 class="title reveal" id="hero-title"><span>AMERICAN</span><span class="second">SPIRIT<span class="red">.</span></span></h2><div class="short-line"></div><p class="subtitle reveal">緑と赤。強いコントラスト。<br>ひとつのパッケージから、<br>Webの世界観を組み立てる。</p><p class="caption reveal">ご提供の写真を題材にした、タイポグラフィ・配色・モーションの非公式ポートフォリオデモです。</p><a class="scroll-cta reveal" href="#concept"><span class="circle" aria-hidden="true">↓</span>EXPLORE THE DESIGN</a></div>
-<div class="hero-visual"><div class="visual-ring" aria-hidden="true"></div><div class="red-disc" aria-hidden="true"></div><div class="package-holder"><img class="package" src="assets/reference.jpg" alt="緑色のナチュラル アメリカン スピリットのパッケージ写真。正面に健康上の警告表示がある" width="1152" height="1536"></div><div class="package-tag">REFERENCE / USER PHOTO</div><div class="hero-counter">01 — VISUAL REFERENCE</div></div></section>
-<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>COLOR</span><span>TYPOGRAPHY</span><span>COMPOSITION</span><span>MOTION</span><span>COLOR</span><span>TYPOGRAPHY</span><span>COMPOSITION</span><span>MOTION</span></div></div>
-<section class="section story" id="concept"><div><p class="section-kicker reveal">01 / DESIGN CONCEPT</p><h2 class="section-title reveal">色から、<br><em>世界観</em>へ。</h2><p class="story-copy reveal">写真のエメラルドグリーンを背景に、印象的なコーラルレッドをアクセントとして抽出。力強いコンデンス書体と、大きな余白で、レトロとモダンを重ねています。特定ブランドの公式Webサイトではなく、画像1枚からデザインシステムを組み立てる実験です。</p><div class="swatches reveal" aria-label="使用した3つの色"><div class="swatch"><span>EMERALD</span><span>#087965</span></div><div class="swatch"><span>CORAL</span><span>#F45B56</span></div><div class="swatch"><span>DEEP GREEN</span><span>#112B28</span></div></div></div><div class="large-index" aria-hidden="true">01</div></section>
-<section class="section details" id="details"><div class="details-wrap"><div><p class="section-kicker reveal">02 / PROJECT NOTES</p><h2 class="section-title reveal">DESIGN<br>WITHOUT<br>THE HYPE<span style="color:#f45b56">.</span></h2></div><div><p style="line-height:2;font-size:16px;max-width:540px" class="reveal">架空の効果・健康上の優位性・販売情報は掲載せず、写真を使ったレイアウトと表現技術だけを検証します。</p><div class="detail-list reveal"><div class="detail-row"><span>PROJECT</span><div>One-page editorial concept</div></div><div class="detail-row"><span>SOURCE</span><div>ユーザー提供のパッケージ写真</div></div><div class="detail-row"><span>TECH</span><div>HTML / CSS / 軽量 JavaScript</div></div><div class="detail-row"><span>FEATURES</span><div>レスポンシブ、スクロール演出、reduced-motion対応</div></div><div class="detail-row"><span>STATUS</span><div>非公式・非商用の一時的なデザインデモ</div></div></div></div></div></section>
-<section class="legal"><div><h2>IMPORTANT NOTICE / 注意事項</h2><p><strong>喫煙は健康に重大な悪影響を及ぼします。</strong> 写真にある「無添加」等の表現は、健康被害が小さいことを意味しません。このページはたばこの販売、購入案内、喫煙の推奨を目的としません。未成年者の喫煙は禁止されています。</p></div><span style="color:var(--mint);font-size:11px;letter-spacing:.17em">NOT FOR SALE</span></section>
-</main>
-<footer class="footer"><span>DESIGN STUDY © 2026 · UNOFFICIAL CONCEPT</span><button class="back-top" type="button" id="backTop">BACK TO TOP ↑</button></footer>
+<a class="skip" href="#horizon">本文へ移動</a>
+
+<header class="bar on-dark" id="bar">
+  <a class="brand" href="#hero"><img src="assets/logo.png" width="133" height="34" alt="Visual Study（ページの先頭へ）"></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+    <span>メニュー</span><span class="menu-btn__icon" aria-hidden="true"></span>
+  </button>
+  <nav class="nav" id="site-nav" aria-label="ページ内の章">
+    <ul>
+      <li><a href="#horizon">水平線</a></li>
+      <li><a href="#palette">色</a></li>
+      <li><a href="#motion">四秒</a></li>
+      <li><a href="#notes">注記</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero on-dark" id="hero" aria-labelledby="hero-title">
+    <video class="hero__video" id="heroVideo" src="assets/hero.mp4" poster="assets/poster.jpg"
+      autoplay muted loop playsinline preload="auto"
+      aria-label="海に浮かぶサーファーと、LINEコミュニティ募集の文字が映る約4秒の動画"></video>
+    <script>
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var v = document.getElementById('heroVideo'); v.removeAttribute('autoplay'); v.pause();
+      }
+    </script>
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <h1 class="mark" id="hero-title">
+      <span class="mark__line"><span class="mark__inner">鏡のような海で、</span></span>
+      <span class="mark__line"><span class="mark__inner">波を待つ。</span></span>
+    </h1>
+    <div class="mark-mirror" aria-hidden="true">
+      <span class="mark__wave">
+        <span class="mark__line"><span class="mark__inner">鏡のような海で、</span></span>
+        <span class="mark__line"><span class="mark__inner">波を待つ。</span></span>
+      </span>
+    </div>
+
+    <div class="hero__meta">
+      <p class="hero__tag">非公式・非商用のビジュアルデザイン研究</p>
+      <p class="hero__lede">四秒の海の映像を、一枚の紙面として組むウェブデザインの習作です。</p>
+    </div>
+
+    <div class="controls" role="group" aria-label="映像の操作">
+      <button class="ctrl" id="playBtn" type="button" aria-label="映像を一時停止">
+        <svg class="when-off" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.2" height="12" fill="currentColor"/><rect x="8.8" y="1" width="3.2" height="12" fill="currentColor"/></svg>
+        <svg class="when-on" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.2v11.6L12.6 7z" fill="currentColor"/></svg>
+        <span class="ctrl__label" aria-hidden="true"><span class="when-off">停止</span><span class="when-on">再生</span></span>
+      </button>
+      <button class="ctrl" id="soundBtn" type="button" aria-pressed="false" aria-label="音声">
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 5h3l4-3.5v11L4 9H1z" fill="currentColor"/><path class="when-on" d="M10 4.2c1.6 1.5 1.6 4.1 0 5.6M11.6 2.6c2.5 2.4 2.5 6.4 0 8.8" stroke="currentColor" stroke-width="1.3" fill="none"/><path class="when-off" d="M10 4.8l3.4 4.4M13.4 4.8L10 9.2" stroke="currentColor" stroke-width="1.3"/></svg>
+        <span class="ctrl__label" id="soundLabel" aria-hidden="true">音声オフ</span>
+      </button>
+      <div class="loop" aria-hidden="true">
+        <span class="loop__track"><span class="loop__fill" id="loopFill"></span></span>
+        <span class="loop__time" id="loopTime">0.0 / 4.0 秒</span>
+      </div>
+      <a class="hero__next" href="#horizon">下へ読む</a>
+    </div>
+  </section>
+
+  <section class="chapter on-light" id="horizon" aria-labelledby="horizon-title">
+    <span class="chapter__rule" aria-hidden="true"></span>
+    <div class="chapter__grid">
+      <div>
+        <h2 id="horizon-title">水平線を、紙面の折り目にする。</h2>
+        <p class="chapter__intro">この映像でいちばん強い線は、空と海を分ける水平線です。文字・余白・操作部は、すべてこの一本の線との関係で配置しました。画面の比率が変わっても、スクリプトが映像内の水平線の位置を計算し、見出しをその上に合わせます。</p>
+      </div>
+      <div class="frames">
+        <figure class="frame">
+          <svg viewBox="0 0 320 200" role="img" aria-label="PCの構成図。右側の空に横書きの見出し、水平線の下にその鏡像、左側の水面にサーファー。">
+            <rect x=".5" y=".5" width="319" height="199" fill="#0F2C6E" stroke="#0B1F45"/>
+            <rect x=".5" y=".5" width="319" height="14" fill="#0B1F45"/>
+            <rect x="8" y="5" width="34" height="5" fill="#EEF3F0"/>
+            <rect x="248" y="6" width="14" height="3" fill="#EEF3F0" opacity=".7"/><rect x="266" y="6" width="10" height="3" fill="#EEF3F0" opacity=".7"/><rect x="280" y="6" width="14" height="3" fill="#EEF3F0" opacity=".7"/><rect x="298" y="6" width="14" height="3" fill="#EEF3F0" opacity=".7"/>
+            <line x1="0" y1="104" x2="320" y2="104" stroke="#2FA9A0" stroke-width="2"/>
+            <rect x="148" y="66" width="148" height="14" fill="#FFFFFF"/>
+            <rect x="148" y="84" width="90" height="14" fill="#FFFFFF"/>
+            <rect x="148" y="110" width="90" height="10" fill="#FFFFFF" opacity=".35"/>
+            <rect x="148" y="124" width="148" height="7" fill="#FFFFFF" opacity=".15"/>
+            <circle cx="90" cy="134" r="5" fill="#E9C37A"/>
+            <rect x="12" y="168" width="96" height="6" fill="#EEF3F0" opacity=".7"/>
+            <rect x="12" y="182" width="40" height="10" rx="5" fill="none" stroke="#EEF3F0"/>
+            <rect x="58" y="182" width="40" height="10" rx="5" fill="none" stroke="#EEF3F0"/>
+          </svg>
+          <figcaption><strong>PC</strong>見出しは右の空に置き、水平線のすぐ上で終わらせます。水面には見出しの鏡像がうすく揺れます。サーファーのいる左側には文字を置きません。</figcaption>
+        </figure>
+        <figure class="frame frame--phone">
+          <svg viewBox="0 0 120 240" role="img" aria-label="スマートフォンの構成図。右上の空に縦書きの見出し、水平線の下は空けてある。">
+            <rect x=".5" y=".5" width="119" height="239" rx="10" fill="#0F2C6E" stroke="#0B1F45"/>
+            <rect x="1" y="10" width="118" height="14" fill="#0B1F45"/>
+            <rect x="8" y="15" width="28" height="5" fill="#EEF3F0"/>
+            <rect x="96" y="15" width="16" height="5" fill="#EEF3F0" opacity=".7"/>
+            <rect x="100" y="34" width="10" height="72" fill="#FFFFFF"/>
+            <rect x="86" y="34" width="10" height="44" fill="#FFFFFF"/>
+            <line x1="0" y1="138" x2="120" y2="138" stroke="#2FA9A0" stroke-width="2"/>
+            <circle cx="36" cy="156" r="4" fill="#E9C37A"/>
+            <rect x="10" y="196" width="72" height="5" fill="#EEF3F0" opacity=".7"/>
+            <rect x="10" y="214" width="16" height="12" rx="6" fill="none" stroke="#EEF3F0"/>
+            <rect x="30" y="214" width="16" height="12" rx="6" fill="none" stroke="#EEF3F0"/>
+          </svg>
+          <figcaption><strong>スマートフォン</strong>縦長の映像は画面とほぼ同じ比率なので、ほとんど切り取らずに見せられます。見出しは縦書きにして右上の空へ。水平線より下は、サーファーと波のために空けておきます。</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter on-light" id="palette" aria-labelledby="palette-title">
+    <span class="chapter__rule" aria-hidden="true"></span>
+    <div class="chapter__grid">
+      <div>
+        <h2 id="palette-title">映像から拾った五つの色</h2>
+        <p class="chapter__intro">色は映像の静止画から、上の空から下の水底へ順に拾いました。文字に使う組み合わせは、WCAG AA の基準（通常の文字で4.5:1）を満たすものだけです。対比の数値は相対輝度からの計算値です。</p>
+      </div>
+      <ul class="strata">
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#0F2C6E" aria-hidden="true"></span>
+          <div><span class="stratum__name">空の群青</span><span class="stratum__hex">#0F2C6E</span>
+            <p class="stratum__role">「四秒」の章の地色。白い文字との対比は13.1:1。</p></div>
+        </li>
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#E9C37A" aria-hidden="true"></span>
+          <div><span class="stratum__name">雲の金</span><span class="stratum__hex">#E9C37A</span>
+            <p class="stratum__role">暗い面でのフォーカス表示と進行バー。深い紺との対比は9.7:1。明るい面の文字には使いません。</p></div>
+        </li>
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#2FA9A0" aria-hidden="true"></span>
+          <div><span class="stratum__name">波の翠</span><span class="stratum__hex">#2FA9A0</span>
+            <p class="stratum__role">図の水平線。深い紺との対比は5.6:1。明るい面で文字にするときは濃い翠 #1D6F6A（5.3:1）に替えます。</p></div>
+        </li>
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#EEF3F0" aria-hidden="true"></span>
+          <div><span class="stratum__name">潮の白</span><span class="stratum__hex">#EEF3F0</span>
+            <p class="stratum__role">明るい章の地色。深い紺の文字との対比は14.4:1。</p></div>
+        </li>
+        <li class="stratum">
+          <span class="stratum__chip" style="background:#0B1F45" aria-hidden="true"></span>
+          <div><span class="stratum__name">深い紺</span><span class="stratum__hex">#0B1F45</span>
+            <p class="stratum__role">本文、半透明のヘッダー、フッター。</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter chapter--deep on-dark" id="motion" aria-labelledby="motion-title">
+    <span class="chapter__rule" aria-hidden="true"></span>
+    <div class="chapter__grid">
+      <div>
+        <h2 id="motion-title">四秒の使い方</h2>
+        <p class="chapter__intro">映像は約四秒で一周します。ページの動きはこの周期に合わせ、映像より目立つ動きは足していません。右の数字は、上の映像がいまループのどこにいるかを示しています。</p>
+      </div>
+      <div>
+        <div class="clock">
+          <p class="clock__label" id="clockLabel">現在のループ位置</p>
+          <p class="clock__read" aria-hidden="true"><span id="clockRead">0.0</span><small>秒</small></p>
+          <div class="clock__scale" aria-hidden="true">
+            <span class="clock__fill" id="clockFill"></span>
+            <ol class="clock__ticks">
+              <li style="left:0">0</li><li style="left:25%">1</li><li style="left:50%">2</li><li style="left:75%">3</li><li style="left:100%">4秒</li>
+            </ol>
+          </div>
+        </div>
+        <dl class="rules">
+          <div><dt>映像</dt><dd>音声なしで自動再生し、繰り返します。画面下の操作部で、いつでも停止・再生と音声の切り替えができます。</dd></div>
+          <div><dt>見出しの映り込み</dt><dd>PCでは、水面に映った見出しが映像と同じ四秒の周期でわずかに揺れます。</dd></div>
+          <div><dt>章の区切り線</dt><dd>各章の上の線は、画面に入ったときに一度だけ左から引かれます。文字は動かしません。</dd></div>
+          <div><dt>動きを減らす設定</dt><dd>端末で「視差効果を減らす」などを有効にしていると、映像は自動再生せず静止画で止まり、揺れと線の動きもなくなります。再生ボタンで見ることはできます。</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter on-light" id="notes" aria-labelledby="notes-title">
+    <span class="chapter__rule" aria-hidden="true"></span>
+    <div class="chapter__grid">
+      <h2 id="notes-title">この頁について</h2>
+      <ul class="notes">
+        <li>これは非公式・非商用のビジュアルデザイン研究です。一時的に公開している試作で、検索エンジンに登録しない設定（noindex）にしています。</li>
+        <li>特定の企業・ブランド・製品とは関係がなく、それらによる推奨や提携を示すものではありません。</li>
+        <li>商品の紹介・販売・購入、お問い合わせの機能はありません。</li>
+        <li>映像はユーザーから提供された素材です。左上のロゴは、この研究のための仮のものです。</li>
+      </ul>
+    </div>
+  </section>
+<section class="reference-study" aria-label="元画像のデザイン研究">
+  <div><span class="chapter__num">05 / SOURCE REFERENCE</span><h2>参照画像から、映像表現へ。</h2><p>制作時に提供されたパッケージ写真を、配色とレイアウトの研究用資料として掲載しています。ここで紹介するのは商品ではなく、写真からWebの視覚表現を組み立てるデザイン工程です。販売・宣伝・購入案内はありません。</p></div>
+  <figure><img src="assets/reference.jpg" loading="lazy" alt="ユーザー提供のパッケージ参考写真" width="1152" height="1536"><figcaption>REFERENCE MATERIAL / UNOFFICIAL DESIGN STUDY ONLY</figcaption></figure>
+</section></main>
+
+<footer class="foot on-dark">
+  <img src="assets/logo.png" width="110" height="28" alt="Visual Study">
+  <p>非公式・非商用のビジュアルデザイン研究（一時公開）</p>
+  <p class="foot__powered">powered by RSS7.ai Works</p>
+<button type="button" class="share-button" id="shareButton" aria-label="このデモのURLを共有する">SHARE THIS STUDY</button></footer>
+
 <script>
-(()=>{'use strict';const els=document.querySelectorAll('.reveal');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||!('IntersectionObserver'in window)){els.forEach(el=>el.classList.add('is-visible'))}else{const ob=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');ob.unobserve(e.target)}})},{threshold:.08});els.forEach(el=>ob.observe(el))}document.getElementById('backTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:reduce?'instant':'smooth'}))})();
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var video = document.getElementById('heroVideo');
+  var hero = document.getElementById('hero');
+  var bar = document.getElementById('bar');
+
+  /* ── Headline sits on the video's horizon (≈57.2% of the source frame) ── */
+  var HORIZON = 0.572, POS_Y = 0.6;
+  function placeHorizon() {
+    var W = hero.clientWidth, H = hero.clientHeight;
+    var vw = video.videoWidth || 720, vh = video.videoHeight || 1280;
+    var s = Math.max(W / vw, H / vh), dispH = vh * s;
+    var y = (H - dispH) * POS_Y + HORIZON * dispH;
+    var pct = Math.min(70, Math.max(34, y / H * 100));
+    hero.style.setProperty('--horizon', pct.toFixed(2) + '%');
+  }
+  placeHorizon();
+  video.addEventListener('loadedmetadata', placeHorizon);
+  window.addEventListener('resize', placeHorizon);
+
+  /* ── Play / pause ── */
+  var playBtn = document.getElementById('playBtn');
+  function syncPlay() {
+    var paused = video.paused;
+    playBtn.classList.toggle('is-on', paused);
+    playBtn.setAttribute('aria-label', paused ? '映像を再生' : '映像を一時停止');
+  }
+  playBtn.addEventListener('click', function () {
+    if (video.paused) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    else video.pause();
+  });
+  video.addEventListener('play', function () { syncPlay(); tick(); });
+  video.addEventListener('pause', syncPlay);
+  syncPlay();
+
+  /* ── Sound ── */
+  var soundBtn = document.getElementById('soundBtn');
+  var soundLabel = document.getElementById('soundLabel');
+  var noAudio = false;
+  function syncSound() {
+    if (noAudio) {
+      soundBtn.setAttribute('aria-disabled', 'true');
+      soundBtn.removeAttribute('aria-pressed');
+      soundBtn.setAttribute('aria-label', 'この映像には音声がありません');
+      soundLabel.textContent = '音声なし';
+      soundBtn.classList.remove('is-on');
+      return;
+    }
+    var on = !video.muted;
+    soundBtn.classList.toggle('is-on', on);
+    soundBtn.setAttribute('aria-pressed', String(on));
+    soundBtn.setAttribute('aria-label', '音声');
+    soundLabel.textContent = on ? '音声オン' : '音声オフ';
+  }
+  soundBtn.addEventListener('click', function () {
+    if (noAudio) return;
+    video.muted = !video.muted;
+    if (!video.muted && video.paused) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    syncSound();
+  });
+  video.addEventListener('volumechange', syncSound);
+  function detectAudio() {
+    if (typeof video.mozHasAudio === 'boolean') noAudio = !video.mozHasAudio;
+    else if (video.audioTracks) noAudio = video.audioTracks.length === 0;
+    else if (typeof video.webkitAudioDecodedByteCount === 'number' && video.currentTime > 0.8) noAudio = video.webkitAudioDecodedByteCount === 0;
+    syncSound();
+  }
+  video.addEventListener('loadedmetadata', detectAudio);
+  video.addEventListener('timeupdate', function once() {
+    if (video.currentTime > 0.8) { detectAudio(); video.removeEventListener('timeupdate', once); }
+  });
+  syncSound();
+
+  /* ── Loop position (hero bar + 四秒 chapter) ── */
+  var loopFill = document.getElementById('loopFill'), loopTime = document.getElementById('loopTime');
+  var clockFill = document.getElementById('clockFill'), clockRead = document.getElementById('clockRead');
+  var raf = 0;
+  function draw() {
+    var d = video.duration && isFinite(video.duration) ? video.duration : 4;
+    var t = video.currentTime % d, r = t / d;
+    loopFill.style.transform = clockFill.style.transform = 'scaleX(' + r.toFixed(4) + ')';
+    loopTime.textContent = t.toFixed(1) + ' / ' + d.toFixed(1) + ' 秒';
+    clockRead.textContent = t.toFixed(1);
+  }
+  function tick() {
+    cancelAnimationFrame(raf);
+    draw();
+    if (!video.paused) raf = requestAnimationFrame(tick);
+  }
+  video.addEventListener('seeked', draw);
+  video.addEventListener('loadedmetadata', draw);
+
+  /* ── Header: denser once the hero is behind it ── */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      bar.classList.toggle('is-solid', !es[0].isIntersecting);
+    }, { rootMargin: '-80px 0px 0px 0px' }).observe(hero);
+  }
+
+  /* ── Chapters: rule draws once, nav marks current chapter ── */
+  var chapters = [].slice.call(document.querySelectorAll('.chapter'));
+  var links = [].slice.call(document.querySelectorAll('.nav a'));
+  if ('IntersectionObserver' in window) {
+    var reveal = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); reveal.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    var current = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (a) {
+          if (a.getAttribute('href') === '#' + e.target.id) a.setAttribute('aria-current', 'location');
+          else a.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    chapters.forEach(function (c) { reveal.observe(c); current.observe(c); });
+    new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) links.forEach(function (a) { a.removeAttribute('aria-current'); });
+    }, { rootMargin: '-45% 0px -50% 0px' }).observe(hero);
+  } else {
+    chapters.forEach(function (c) { c.classList.add('is-in'); });
+  }
+
+  /* ── Mobile menu ── */
+  var menuBtn = document.querySelector('.menu-btn');
+  var nav = document.getElementById('site-nav');
+  function setMenu(open, returnFocus) {
+    menuBtn.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('is-open', open);
+    if (open) { var first = nav.querySelector('a'); if (first) first.focus(); }
+    else if (returnFocus) menuBtn.focus();
+  }
+  menuBtn.addEventListener('click', function () { setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false, true);
+  });
+  document.addEventListener('click', function (e) {
+    if (menuBtn.getAttribute('aria-expanded') === 'true' && !e.target.closest('.bar')) setMenu(false);
+  });
+  var narrow = window.matchMedia('(max-width: 720px)');
+  if (narrow.addEventListener) narrow.addEventListener('change', function () { setMenu(false); });
+
+  /* ── Reduced motion toggled while open ── */
+  if (reduce.addEventListener) reduce.addEventListener('change', function (e) { if (e.matches) video.pause(); });
+})();
 </script>
 <script>
-(()=>{const v=document.getElementById('heroVideo'),p=document.getElementById('videoPlay'),s=document.getElementById('videoSound');const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced){v.pause();v.removeAttribute('autoplay');p.textContent='▶ PLAY';p.setAttribute('aria-pressed','false')}else{v.play().catch(()=>{p.textContent='▶ PLAY';p.setAttribute('aria-pressed','false')})}p.addEventListener('click',()=>{if(v.paused){v.play().then(()=>{p.textContent='Ⅱ PAUSE';p.setAttribute('aria-pressed','true');p.setAttribute('aria-label','動画を一時停止')}).catch(()=>{})}else{v.pause();p.textContent='▶ PLAY';p.setAttribute('aria-pressed','false');p.setAttribute('aria-label','動画を再生')}});s.addEventListener('click',()=>{v.muted=!v.muted;s.textContent=v.muted?'♪ SOUND OFF':'♪ SOUND ON';s.setAttribute('aria-pressed',String(!v.muted));s.setAttribute('aria-label',v.muted?'音声を有効にする':'音声をミュートする')});if('IntersectionObserver'in window){const observer=new IntersectionObserver(([entry])=>{if(!entry.isIntersecting&&!v.paused)v.pause();else if(entry.isIntersecting&&!reduced&&p.getAttribute('aria-pressed')==='true')v.play().catch(()=>{})},{threshold:.08});observer.observe(v)}})();
-</script>
-</body>
+(function(){
+  var btn=document.getElementById('shareButton'); if(!btn)return;
+  btn.addEventListener('click',async function(){
+    var url=window.location.href;
+    if(navigator.share){try{await navigator.share({title:document.title,url:url});return}catch(e){if(e&&e.name==='AbortError')return}}
+    try{
+      if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url)}
+      else{var t=document.createElement('textarea');t.value=url;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();if(!document.execCommand('copy'))throw new Error('copy failed');t.remove()}
+      btn.textContent='URL COPIED';btn.setAttribute('aria-label','URLをコピーしました');
+    }catch(e){btn.textContent='COPY UNAVAILABLE';btn.setAttribute('aria-label','URLをコピーできませんでした')}
+  });
+})();
+</script></body>
 </html>
